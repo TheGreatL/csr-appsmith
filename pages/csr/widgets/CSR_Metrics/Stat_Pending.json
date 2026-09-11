@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 8,
+  "bottomRow": 7,
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
@@ -26,6 +26,8 @@
   "minDynamicHeight": 4,
   "minWidth": 100,
   "needsErrorInfo": false,
+  "originalBottomRow": 8,
+  "originalTopRow": 2,
   "overflow": "NONE",
   "parentColumnSpace": 19,
   "parentId": "canvas_csr_metrics_id",
@@ -43,4 +45,3 @@
   "widgetId": "stat_pending_id",
   "widgetName": "Stat_Pending"
 }
-

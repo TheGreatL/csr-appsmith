@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 4,
+  "bottomRow": 6,
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
@@ -18,26 +18,27 @@
   "isLoading": false,
   "isVisible": true,
   "key": "csr_tbl_title_k",
-  "leftColumn": 1,
+  "leftColumn": 0,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
   "needsErrorInfo": false,
+  "originalBottomRow": 7,
+  "originalTopRow": 1,
   "overflow": "NONE",
   "parentColumnSpace": 19,
   "parentId": "canvas_csr_main_id",
   "parentRowSpace": 10,
   "renderMode": "CANVAS",
   "responsiveBehavior": "fill",
-  "rightColumn": 20,
+  "rightColumn": 18,
   "shouldTruncate": false,
   "text": "Service Requests Queue",
   "textAlign": "LEFT",
   "textColor": "#1E293B",
-  "topRow": 1,
+  "topRow": 2,
   "type": "TEXT_WIDGET",
   "version": 1,
   "widgetId": "text_csr_table_title_id",
   "widgetName": "Text_TableTitle"
 }
-

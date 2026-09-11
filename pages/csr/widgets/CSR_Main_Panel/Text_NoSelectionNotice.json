@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 26,
+  "bottomRow": 22,
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
@@ -26,6 +26,8 @@
   "minDynamicHeight": 4,
   "minWidth": 450,
   "needsErrorInfo": false,
+  "originalBottomRow": 22,
+  "originalTopRow": 15,
   "overflow": "NONE",
   "parentColumnSpace": 19,
   "parentId": "canvas_csr_main_id",
@@ -37,7 +39,7 @@
   "text": "👈 Select any service request from the queue on the left to display its complete details, client information, and dispatch an applicable technician.",
   "textAlign": "CENTER",
   "textColor": "#64748B",
-  "topRow": 10,
+  "topRow": 15,
   "type": "TEXT_WIDGET",
   "version": 1,
   "widgetId": "text_no_sel_notice_id",

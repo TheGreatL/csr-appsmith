@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 23,
+  "bottomRow": 31,
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
@@ -29,6 +29,8 @@
   "minDynamicHeight": 4,
   "minWidth": 450,
   "needsErrorInfo": false,
+  "originalBottomRow": 31,
+  "originalTopRow": 27,
   "overflow": "NONE",
   "parentColumnSpace": 19,
   "parentId": "canvas_csr_main_id",
@@ -40,7 +42,7 @@
   "text": "{{ '⚡ Current Status: ' + (Table_Requests.selectedRow.status ? Table_Requests.selectedRow.status.toUpperCase() : 'PENDING') + ' | Assigned Tech: ' + (Table_Requests.selectedRow.assigned_tech_name || 'Unassigned') }}",
   "textAlign": "LEFT",
   "textColor": "#047857",
-  "topRow": 20,
+  "topRow": 27,
   "type": "TEXT_WIDGET",
   "version": 1,
   "widgetId": "text_csr_selected_req_id",
