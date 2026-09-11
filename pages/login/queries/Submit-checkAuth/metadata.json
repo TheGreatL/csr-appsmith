@@ -1,16 +1,20 @@
 {
-  "gitSyncId": "6aa4000273ec81215b1a4018_4aaca057-394c-43fb-ad47-fe8055c508e7",
-  "id": "login_Submit.myFun2",
+  "gitSyncId": "6aa4000273ec81215b1a4018_531f0405-1ebd-4770-892b-3e6988093990",
+  "id": "login_Submit.checkAuth",
   "pluginId": "js-plugin",
   "pluginType": "JS",
   "unpublishedAction": {
     "actionConfiguration": {
       "encodeParamsToggle": true,
-      "jsArguments": [],
+      "jsArguments": [
+        {
+          "name": "allowedRoles",
+          "value": "{{[]}}"
+        }
+      ],
       "paginationType": "NONE",
       "timeoutInMillisecond": 10000
     },
-    "clientSideExecution": true,
     "collectionId": "login_Submit",
     "confirmBeforeExecute": false,
     "datasource": {
@@ -23,8 +27,8 @@
         "key": "body"
       }
     ],
-    "fullyQualifiedName": "Submit.myFun2",
-    "name": "myFun2",
+    "fullyQualifiedName": "Submit.checkAuth",
+    "name": "checkAuth",
     "pageId": "login",
     "runBehaviour": "MANUAL",
     "userSetOnLoad": false
