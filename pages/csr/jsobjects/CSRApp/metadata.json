@@ -1,0 +1,12 @@
+{
+  "gitSyncId": "6aa4000273ec81215b1a4018_csr_CSRApp_obj",
+  "id": "csr_CSRApp",
+  "unpublishedCollection": {
+    "name": "CSRApp",
+    "pageId": "csr",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": []
+  }
+}
+

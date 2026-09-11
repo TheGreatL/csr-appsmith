@@ -1,0 +1,181 @@
+-- =============================================================================
+-- APPSMITH SQL QUERIES FOR AIVEN MYSQL DATASOURCE
+-- Copy and paste these into your Appsmith queries editor or inspect below.
+-- Mustache tags like {{...}} are dynamically evaluated by Appsmith.
+-- =============================================================================
+
+-- -----------------------------------------------------------------------------
+-- 1. AUTHENTICATION & LOGIN (Page: login)
+-- Query Name: Login_Query
+-- -----------------------------------------------------------------------------
+SELECT 
+    user_id,
+    name,
+    email,
+    user_role,
+    phone
+FROM users 
+WHERE email = {{ email.text.trim() }} 
+  AND password = {{ password.text.trim() }}
+LIMIT 1;
+
+
+-- -----------------------------------------------------------------------------
+-- 2. CLIENT SERVICE REQUESTS (Page: client)
+-- Query Name: Get_Client_Requests
+-- Fetches only the requests belonging to the logged-in client.
+-- -----------------------------------------------------------------------------
+SELECT 
+    sr.service_request_id,
+    sr.subject,
+    sr.description,
+    sr.type,
+    sr.status,
+    sr.priority,
+    sr.location,
+    sr.created_at,
+    sr.updated_at,
+    COALESCE(tech.name, 'Unassigned') AS assigned_technician
+FROM service_request sr
+LEFT JOIN service_request_technicians srt ON sr.service_request_id = srt.service_request_id
+LEFT JOIN users tech ON srt.tech_id = tech.user_id
+WHERE sr.client_id = {{ appsmith.store.currentUser ? appsmith.store.currentUser.user_id : 5 }}
+ORDER BY sr.created_at DESC;
+
+
+-- -----------------------------------------------------------------------------
+-- 3. CREATE SERVICE REQUEST (Page: client)
+-- Query Name: Create_Service_Request
+-- Submits a new repair or diagnostic request.
+-- -----------------------------------------------------------------------------
+INSERT INTO service_request (
+    client_id,
+    subject,
+    type,
+    priority,
+    description,
+    location,
+    status
+) VALUES (
+    {{ appsmith.store.currentUser ? appsmith.store.currentUser.user_id : 5 }},
+    {{ input_subject.text }},
+    {{ select_type.selectedOptionValue }},
+    {{ select_priority.selectedOptionValue || 'medium' }},
+    {{ input_description.text }},
+    {{ input_location.text || 'N/A' }},
+    'pending'
+);
+
+
+-- -----------------------------------------------------------------------------
+-- 4. CSR / ADMIN: FETCH ALL REQUESTS (Page: csr)
+-- Query Name: Get_All_Service_Requests
+-- Supports optional filtering by status (from a Select/Tabs widget) and search.
+-- -----------------------------------------------------------------------------
+SELECT 
+    sr.service_request_id,
+    sr.subject,
+    sr.type,
+    sr.status,
+    sr.priority,
+    sr.location,
+    sr.description,
+    sr.created_at,
+    sr.updated_at,
+    client.name AS client_name,
+    client.email AS client_email,
+    client.phone AS client_phone,
+    COALESCE(tech.user_id, NULL) AS tech_id,
+    COALESCE(tech.name, 'Unassigned') AS assigned_tech_name,
+    COALESCE(srt.notes, '') AS assignment_notes
+FROM service_request sr
+INNER JOIN users client ON sr.client_id = client.user_id
+LEFT JOIN service_request_technicians srt ON sr.service_request_id = srt.service_request_id
+LEFT JOIN users tech ON srt.tech_id = tech.user_id
+WHERE (
+    {{ !select_filter_status.selectedOptionValue || select_filter_status.selectedOptionValue === 'all' }} 
+    OR sr.status = {{ select_filter_status.selectedOptionValue }}
+)
+AND (
+    {{ !input_search.text }} 
+    OR sr.subject LIKE {{ '%' + input_search.text + '%' }}
+    OR client.name LIKE {{ '%' + input_search.text + '%' }}
+)
+ORDER BY 
+    CASE sr.priority
+        WHEN 'urgent' THEN 1
+        WHEN 'high' THEN 2
+        WHEN 'medium' THEN 3
+        WHEN 'low' THEN 4
+        ELSE 5
+    END,
+    sr.created_at DESC;
+
+
+-- -----------------------------------------------------------------------------
+-- 5. CSR: GET TECHNICIANS & THEIR SKILLS (Page: csr)
+-- Query Name: Get_Technicians_List
+-- Lists all technicians with grouped skill tags to aid assignment.
+-- -----------------------------------------------------------------------------
+SELECT 
+    u.user_id,
+    u.name,
+    u.email,
+    u.phone,
+    COALESCE(GROUP_CONCAT(s.name SEPARATOR ', '), 'No skills listed') AS skills_list
+FROM users u
+LEFT JOIN tech_skills ts ON u.user_id = ts.user_id
+LEFT JOIN skills s ON ts.skill_id = s.skill_id
+WHERE u.user_role = 'technician'
+GROUP BY u.user_id, u.name, u.email, u.phone
+ORDER BY u.name ASC;
+
+
+-- -----------------------------------------------------------------------------
+-- 6. CSR: ASSIGN TECHNICIAN TO SERVICE REQUEST (Page: csr)
+-- Query Name: Assign_Technician_To_Request
+-- Inserts/replaces technician assignment and updates request status to 'assigned'.
+-- -----------------------------------------------------------------------------
+INSERT INTO service_request_technicians (
+    service_request_id,
+    tech_id,
+    notes
+) VALUES (
+    {{ Table_Requests.selectedRow.service_request_id }},
+    {{ select_technician.selectedOptionValue }},
+    {{ input_assign_notes.text || 'Assigned via CSR Portal' }}
+)
+ON DUPLICATE KEY UPDATE 
+    tech_id = VALUES(tech_id),
+    notes = VALUES(notes),
+    assigned_at = CURRENT_TIMESTAMP;
+
+-- Immediately followed by updating request status:
+UPDATE service_request 
+SET status = 'assigned'
+WHERE service_request_id = {{ Table_Requests.selectedRow.service_request_id }};
+
+
+-- -----------------------------------------------------------------------------
+-- 7. CSR / TECH: UPDATE REQUEST STATUS (Page: csr)
+-- Query Name: Update_Request_Status
+-- -----------------------------------------------------------------------------
+UPDATE service_request 
+SET 
+    status = {{ select_update_status.selectedOptionValue }},
+    updated_at = CURRENT_TIMESTAMP
+WHERE service_request_id = {{ Table_Requests.selectedRow.service_request_id }};
+
+
+-- -----------------------------------------------------------------------------
+-- 8. CSR METRICS / COUNTERS (Page: csr)
+-- Query Name: Get_Request_Metrics
+-- -----------------------------------------------------------------------------
+SELECT 
+    COUNT(*) AS total_requests,
+    SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) AS pending_count,
+    SUM(CASE WHEN status = 'assigned' THEN 1 ELSE 0 END) AS assigned_count,
+    SUM(CASE WHEN status = 'in_progress' THEN 1 ELSE 0 END) AS in_progress_count,
+    SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) AS completed_count
+FROM service_request;
+

@@ -14,7 +14,11 @@
       "key": "borderRadius"
     }
   ],
-  "dynamicTriggerPathList": [],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
   "isDefaultClickDisabled": true,
   "isDisabled": false,
   "isLoading": false,
@@ -27,6 +31,7 @@
   "mobileRightColumn": 41,
   "mobileTopRow": 24,
   "needsErrorInfo": false,
+  "onClick": "{{Submit.login()}}",
   "parentColumnSpace": 7.234375,
   "parentId": "plvx8sxfb1",
   "parentRowSpace": 10,
