@@ -1,0 +1,20 @@
+{
+  "gitSyncId": "6aa4000273ec81215b1a4018_88d91be6-41ca-49c2-babb-14eaea1f4504",
+  "id": "login_Submit",
+  "unpublishedCollection": {
+    "name": "Submit",
+    "pageId": "login",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "myVar1",
+        "value": "[]"
+      },
+      {
+        "name": "myVar2",
+        "value": "{}"
+      }
+    ]
+  }
+}
