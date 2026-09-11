@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 4,
+  "bottomRow": 5,
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
@@ -23,6 +23,8 @@
   "minDynamicHeight": 4,
   "minWidth": 450,
   "needsErrorInfo": false,
+  "originalBottomRow": 4,
+  "originalTopRow": 1,
   "overflow": "NONE",
   "parentColumnSpace": 19,
   "parentId": "canvas_client_form_id",
@@ -40,4 +42,3 @@
   "widgetId": "text_cl_form_title_id",
   "widgetName": "Text_FormTitle"
 }
-

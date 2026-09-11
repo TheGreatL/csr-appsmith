@@ -2,8 +2,9 @@
   "accentColor": "{{appsmith.theme.colors.primaryColor}}",
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 19,
+  "bottomRow": 20,
   "boxShadow": "none",
+  "defaultOptionValue": "0",
   "dynamicBindingPathList": [
     {
       "key": "accentColor"
@@ -37,6 +38,10 @@
   "minDynamicHeight": 4,
   "minWidth": 450,
   "needsErrorInfo": false,
+  "optionLabel": "label",
+  "optionValue": "value",
+  "originalBottomRow": 19,
+  "originalTopRow": 13,
   "parentColumnSpace": 19,
   "parentId": "canvas_client_form_id",
   "parentRowSpace": 10,
@@ -46,7 +51,7 @@
   "rightColumn": 63,
   "serverSideFiltering": false,
   "sourceData": "{{ Get_Skills_List.data ? Get_Skills_List.data.map(s => ({ label: s.name, value: s.skill_id })) : [{\"label\": \"Hardware Repair\", \"value\": 1}, {\"label\": \"System Diagnostics\", \"value\": 2}, {\"label\": \"Electrical Maintenance\", \"value\": 3}, {\"label\": \"Network Diagnostics\", \"value\": 4}] }}",
-  "topRow": 13,
+  "topRow": 14,
   "type": "SELECT_WIDGET",
   "version": 1,
   "widgetId": "select_skill_id",

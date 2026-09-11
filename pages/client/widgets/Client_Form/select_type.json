@@ -2,7 +2,7 @@
   "accentColor": "{{appsmith.theme.colors.primaryColor}}",
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 19,
+  "bottomRow": 20,
   "boxShadow": "none",
   "defaultOptionValue": "repair",
   "dynamicBindingPathList": [
@@ -36,6 +36,10 @@
   "minDynamicHeight": 4,
   "minWidth": 450,
   "needsErrorInfo": false,
+  "optionLabel": "label",
+  "optionValue": "value",
+  "originalBottomRow": 19,
+  "originalTopRow": 13,
   "parentColumnSpace": 19,
   "parentId": "canvas_client_form_id",
   "parentRowSpace": 10,
@@ -45,10 +49,9 @@
   "rightColumn": 31,
   "serverSideFiltering": false,
   "sourceData": "[\n  {\n    \"label\": \"Repair\",\n    \"value\": \"repair\"\n  },\n  {\n    \"label\": \"Diagnose\",\n    \"value\": \"diagnose\"\n  }\n]",
-  "topRow": 13,
+  "topRow": 14,
   "type": "SELECT_WIDGET",
   "version": 1,
   "widgetId": "select_type_id",
   "widgetName": "select_type"
 }
-

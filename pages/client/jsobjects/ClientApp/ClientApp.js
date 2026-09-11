@@ -1,6 +1,9 @@
 export default {
 	async onPageLoad() {
 		// 1. PAGE GUARD: Verify user session
+		if(appsmith.mode =="edit"){
+			return;
+		}
 		const user = appsmith.store.currentUser;
 		if (!user || !user.email) {
 			showAlert('Access Denied: Please log in first.', 'warning');
