@@ -1,0 +1,53 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 19,
+  "boxShadow": "none",
+  "defaultOptionValue": "medium",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicPropertyPathList": [
+    {
+      "key": "sourceData"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "isDisabled": false,
+  "isFilterable": false,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "sel_prio_k",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelText": "Priority",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 33,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "needsErrorInfo": false,
+  "parentColumnSpace": 19,
+  "parentId": "canvas_client_form_id",
+  "parentRowSpace": 10,
+  "placeholderText": "Select priority",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 63,
+  "serverSideFiltering": false,
+  "sourceData": "[\n  {\"label\": \"Low\", \"value\": \"low\"},\n  {\"label\": \"Medium\", \"value\": \"medium\"},\n  {\"label\": \"High\", \"value\": \"high\"},\n  {\"label\": \"Urgent\", \"value\": \"urgent\"}\n]",
+  "topRow": 13,
+  "type": "SELECT_WIDGET",
+  "version": 1,
+  "widgetId": "select_priority_id",
+  "widgetName": "select_priority"
+}

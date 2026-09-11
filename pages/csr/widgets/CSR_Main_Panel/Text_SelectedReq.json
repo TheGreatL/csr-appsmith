@@ -1,0 +1,45 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 8,
+  "dynamicBindingPathList": [
+    {
+      "key": "fontFamily"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "text"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicTriggerPathList": [],
+  "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+  "fontSize": "0.9rem",
+  "fontStyle": "BOLD",
+  "isLoading": false,
+  "isVisible": true,
+  "key": "csr_sel_req_k",
+  "leftColumn": 42,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "needsErrorInfo": false,
+  "overflow": "NONE",
+  "parentColumnSpace": 19,
+  "parentId": "canvas_csr_main_id",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 63,
+  "shouldTruncate": false,
+  "text": "{{ Table_Requests.selectedRow && Table_Requests.selectedRow.service_request_id ? ('📌 Ticket #' + Table_Requests.selectedRow.service_request_id + ': ' + Table_Requests.selectedRow.subject + ' (' + Table_Requests.selectedRow.type + ' / ' + Table_Requests.selectedRow.status + ')') : '⚠️ Select a ticket from the table on the left' }}",
+  "textAlign": "LEFT",
+  "textColor": "#2563EB",
+  "topRow": 5,
+  "type": "TEXT_WIDGET",
+  "version": 1,
+  "widgetId": "text_csr_selected_req_id",
+  "widgetName": "Text_SelectedReq"
+}

@@ -1,0 +1,45 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 8,
+  "dynamicBindingPathList": [
+    {
+      "key": "fontFamily"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "text"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicTriggerPathList": [],
+  "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+  "fontSize": "1rem",
+  "fontStyle": "BOLD",
+  "isLoading": false,
+  "isVisible": true,
+  "key": "stat_pnd_k",
+  "leftColumn": 17,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 100,
+  "needsErrorInfo": false,
+  "overflow": "NONE",
+  "parentColumnSpace": 19,
+  "parentId": "canvas_csr_metrics_id",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 31,
+  "shouldTruncate": false,
+  "text": "{{ '⏳ Pending Review\\n' + ((Get_Request_Metrics.data && Get_Request_Metrics.data[0]) ? Get_Request_Metrics.data[0].pending_count : 0) }}",
+  "textAlign": "CENTER",
+  "textColor": "#EAB308",
+  "topRow": 2,
+  "type": "TEXT_WIDGET",
+  "version": 1,
+  "widgetId": "stat_pending_id",
+  "widgetName": "Stat_Pending"
+}

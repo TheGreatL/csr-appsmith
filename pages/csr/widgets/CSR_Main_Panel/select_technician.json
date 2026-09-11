@@ -1,0 +1,54 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 17,
+  "boxShadow": "none",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "sourceData"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "sourceData"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "isDisabled": false,
+  "isFilterable": true,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "sel_tech_k",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelText": "Assign Qualified Technician (with Skills)",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 42,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "needsErrorInfo": false,
+  "parentColumnSpace": 19,
+  "parentId": "canvas_csr_main_id",
+  "parentRowSpace": 10,
+  "placeholderText": "Select technician...",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 63,
+  "serverSideFiltering": false,
+  "sourceData": "{{ Get_Technicians_List.data ? Get_Technicians_List.data.map(t => ({ label: t.name + ' [' + t.skills_list + ']', value: t.user_id })) : [] }}",
+  "topRow": 10,
+  "type": "SELECT_WIDGET",
+  "version": 1,
+  "widgetId": "select_technician_id",
+  "widgetName": "select_technician"
+}

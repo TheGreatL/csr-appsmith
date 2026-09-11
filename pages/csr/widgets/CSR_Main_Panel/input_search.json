@@ -1,0 +1,56 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "autoFocus": false,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 5,
+  "boxShadow": "none",
+  "defaultText": "",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicTriggerPathList": [
+    {
+      "key": "onTextChanged"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "search",
+  "inputType": "TEXT",
+  "isDisabled": false,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "inp_csr_srch_k",
+  "label": "",
+  "labelAlignment": "left",
+  "labelPosition": "Left",
+  "labelWidth": 0,
+  "leftColumn": 31,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 120,
+  "needsErrorInfo": false,
+  "onTextChanged": "{{CSRApp.refreshData()}}",
+  "parentColumnSpace": 19,
+  "parentId": "canvas_csr_main_id",
+  "parentRowSpace": 10,
+  "placeholderText": "Search subject or client...",
+  "renderMode": "CANVAS",
+  "resetOnSubmit": false,
+  "responsiveBehavior": "fill",
+  "rightColumn": 40,
+  "shouldAllowAutofill": false,
+  "showStepArrows": false,
+  "topRow": 1,
+  "type": "INPUT_WIDGET_V2",
+  "version": 2,
+  "widgetId": "input_search_id",
+  "widgetName": "input_search"
+}

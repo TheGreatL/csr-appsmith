@@ -1,0 +1,58 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 5,
+  "boxShadow": "none",
+  "defaultOptionValue": "all",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicPropertyPathList": [
+    {
+      "key": "sourceData"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onOptionChange"
+    }
+  ],
+  "isDisabled": false,
+  "isFilterable": false,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "sel_fltr_st_k",
+  "labelAlignment": "left",
+  "labelPosition": "Left",
+  "labelText": "Status:",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 3,
+  "leftColumn": 21,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 120,
+  "needsErrorInfo": false,
+  "onOptionChange": "{{CSRApp.refreshData()}}",
+  "parentColumnSpace": 19,
+  "parentId": "canvas_csr_main_id",
+  "parentRowSpace": 10,
+  "placeholderText": "All",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 30,
+  "serverSideFiltering": false,
+  "sourceData": "[\n  {\"label\": \"All Statuses\", \"value\": \"all\"},\n  {\"label\": \"Pending\", \"value\": \"pending\"},\n  {\"label\": \"Assigned\", \"value\": \"assigned\"},\n  {\"label\": \"In Progress\", \"value\": \"in_progress\"},\n  {\"label\": \"Completed\", \"value\": \"completed\"},\n  {\"label\": \"Cancelled\", \"value\": \"cancelled\"}\n]",
+  "topRow": 1,
+  "type": "SELECT_WIDGET",
+  "version": 1,
+  "widgetId": "select_filter_status_id",
+  "widgetName": "select_filter_status"
+}

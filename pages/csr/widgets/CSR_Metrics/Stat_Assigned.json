@@ -1,0 +1,45 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 8,
+  "dynamicBindingPathList": [
+    {
+      "key": "fontFamily"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "text"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicTriggerPathList": [],
+  "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+  "fontSize": "1rem",
+  "fontStyle": "BOLD",
+  "isLoading": false,
+  "isVisible": true,
+  "key": "stat_asg_k",
+  "leftColumn": 33,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 100,
+  "needsErrorInfo": false,
+  "overflow": "NONE",
+  "parentColumnSpace": 19,
+  "parentId": "canvas_csr_metrics_id",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 47,
+  "shouldTruncate": false,
+  "text": "{{ '🔧 Active / Assigned\\n' + ((Get_Request_Metrics.data && Get_Request_Metrics.data[0]) ? (Number(Get_Request_Metrics.data[0].assigned_count) + Number(Get_Request_Metrics.data[0].in_progress_count)) : 0) }}",
+  "textAlign": "CENTER",
+  "textColor": "#3B82F6",
+  "topRow": 2,
+  "type": "TEXT_WIDGET",
+  "version": 1,
+  "widgetId": "stat_assigned_id",
+  "widgetName": "Stat_Assigned"
+}

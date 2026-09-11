@@ -1,0 +1,110 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 60,
+  "boxShadow": "none",
+  "canFreezeColumn": false,
+  "columnSizeMap": {
+    "task": 245,
+    "step": 62,
+    "status": 100
+  },
+  "defaultPageSize": 0,
+  "defaultSelectedRowIndex": 0,
+  "delimiter": ",",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "tableData"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "enableClientSideSearch": true,
+  "isLoading": false,
+  "isVisible": true,
+  "isVisibleDownload": true,
+  "isVisibleFilters": true,
+  "isVisiblePagination": true,
+  "isVisibleSearch": true,
+  "key": "tbl_csr_req_k",
+  "leftColumn": 1,
+  "minWidth": 450,
+  "needsErrorInfo": false,
+  "parentColumnSpace": 19,
+  "parentId": "canvas_csr_main_id",
+  "parentRowSpace": 10,
+  "primaryColumns": {
+    "service_request_id": {
+      "id": "service_request_id",
+      "index": 0,
+      "label": "ID",
+      "columnType": "number",
+      "isVisible": true,
+      "width": 50
+    },
+    "subject": {
+      "id": "subject",
+      "index": 1,
+      "label": "Subject",
+      "columnType": "text",
+      "isVisible": true,
+      "width": 150
+    },
+    "client_name": {
+      "id": "client_name",
+      "index": 2,
+      "label": "Client",
+      "columnType": "text",
+      "isVisible": true,
+      "width": 110
+    },
+    "type": {
+      "id": "type",
+      "index": 3,
+      "label": "Type",
+      "columnType": "text",
+      "isVisible": true,
+      "width": 80
+    },
+    "priority": {
+      "id": "priority",
+      "index": 4,
+      "label": "Priority",
+      "columnType": "text",
+      "isVisible": true,
+      "width": 80
+    },
+    "status": {
+      "id": "status",
+      "index": 5,
+      "label": "Status",
+      "columnType": "text",
+      "isVisible": true,
+      "width": 90
+    },
+    "assigned_tech_name": {
+      "id": "assigned_tech_name",
+      "index": 6,
+      "label": "Assigned Tech",
+      "columnType": "text",
+      "isVisible": true,
+      "width": 120
+    }
+  },
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 40,
+  "searchKey": "",
+  "tableData": "{{Get_All_Service_Requests.data || []}}",
+  "topRow": 6,
+  "type": "TABLE_WIDGET_V2",
+  "version": 2,
+  "widgetId": "tbl_csr_requests_id",
+  "widgetName": "Table_Requests"
+}

@@ -1,0 +1,51 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "autoFocus": false,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 27,
+  "boxShadow": "none",
+  "defaultText": "",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicTriggerPathList": [],
+  "iconAlign": "left",
+  "inputType": "TEXT",
+  "isDisabled": false,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "inp_loc_k",
+  "label": "Location / Room",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 1,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "needsErrorInfo": false,
+  "parentColumnSpace": 19,
+  "parentId": "canvas_client_form_id",
+  "parentRowSpace": 10,
+  "placeholderText": "e.g., Building B, 3rd Floor",
+  "renderMode": "CANVAS",
+  "resetOnSubmit": true,
+  "responsiveBehavior": "fill",
+  "rightColumn": 63,
+  "shouldAllowAutofill": false,
+  "showStepArrows": false,
+  "topRow": 20,
+  "type": "INPUT_WIDGET_V2",
+  "version": 2,
+  "widgetId": "input_location_id",
+  "widgetName": "input_location"
+}

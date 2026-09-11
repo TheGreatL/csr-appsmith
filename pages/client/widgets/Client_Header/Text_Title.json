@@ -1,0 +1,42 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 6,
+  "dynamicBindingPathList": [
+    {
+      "key": "fontFamily"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicTriggerPathList": [],
+  "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+  "fontSize": "1.25rem",
+  "fontStyle": "BOLD",
+  "isLoading": false,
+  "isVisible": true,
+  "key": "cl_title_k",
+  "leftColumn": 1,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "needsErrorInfo": false,
+  "overflow": "NONE",
+  "parentColumnSpace": 19,
+  "parentId": "canvas_client_hdr_id",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 25,
+  "shouldTruncate": false,
+  "text": "Service Request Portal",
+  "textAlign": "LEFT",
+  "textColor": "#1E293B",
+  "topRow": 1,
+  "type": "TEXT_WIDGET",
+  "version": 1,
+  "widgetId": "text_cl_title_id",
+  "widgetName": "Text_Title"
+}

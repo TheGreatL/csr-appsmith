@@ -1,0 +1,56 @@
+{
+  "allowScroll": false,
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 27,
+  "boxShadow": "none",
+  "chartData": {
+    "status_series": {
+      "data": "{{CSRApp.getStatusChartData()}}",
+      "seriesName": "Requests by Status"
+    }
+  },
+  "chartName": "Requests by Status",
+  "chartType": "COLUMN_CHART",
+  "customEChartConfig": "",
+  "customFusionChartConfig": {
+    "type": "column2d",
+    "dataSource": {
+      "chart": {
+        "caption": "Requests by Status",
+        "theme": "fusion"
+      },
+      "data": []
+    }
+  },
+  "dynamicBindingPathList": [
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "chartData.status_series.data"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+  "isLoading": false,
+  "isVisible": true,
+  "key": "chart_stat_k",
+  "leftColumn": 1,
+  "minWidth": 450,
+  "needsErrorInfo": false,
+  "parentColumnSpace": 19,
+  "parentId": "canvas_csr_charts_id",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 31,
+  "showDataPointLabel": true,
+  "topRow": 1,
+  "type": "CHART_WIDGET",
+  "version": 1,
+  "widgetId": "chart_status_id",
+  "widgetName": "Chart_Status",
+  "xAxisName": "Status",
+  "yAxisName": "Count"
+}

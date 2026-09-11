@@ -1,0 +1,51 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "autoFocus": false,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 27,
+  "boxShadow": "none",
+  "defaultText": "",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicTriggerPathList": [],
+  "iconAlign": "left",
+  "inputType": "TEXT",
+  "isDisabled": false,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "inp_asg_notes_k",
+  "label": "Assignment Instructions / Notes",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 42,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "needsErrorInfo": false,
+  "parentColumnSpace": 19,
+  "parentId": "canvas_csr_main_id",
+  "parentRowSpace": 10,
+  "placeholderText": "e.g., Check power rails and replace blown capacitor",
+  "renderMode": "CANVAS",
+  "resetOnSubmit": true,
+  "responsiveBehavior": "fill",
+  "rightColumn": 63,
+  "shouldAllowAutofill": false,
+  "showStepArrows": false,
+  "topRow": 19,
+  "type": "INPUT_WIDGET_V2",
+  "version": 2,
+  "widgetId": "input_assign_notes_id",
+  "widgetName": "input_assign_notes"
+}

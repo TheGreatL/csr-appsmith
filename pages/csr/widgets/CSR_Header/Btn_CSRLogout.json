@@ -1,0 +1,41 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 6,
+  "boxShadow": "none",
+  "buttonColor": "#EF4444",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "csr_logout_k",
+  "leftColumn": 55,
+  "minWidth": 90,
+  "needsErrorInfo": false,
+  "onClick": "{{CSRApp.logout()}}",
+  "parentColumnSpace": 19,
+  "parentId": "canvas_csr_hdr_id",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "hug",
+  "rightColumn": 63,
+  "text": "Logout",
+  "topRow": 2,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "btn_csr_logout_id",
+  "widgetName": "Btn_CSRLogout"
+}

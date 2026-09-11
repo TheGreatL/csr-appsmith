@@ -1,0 +1,43 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 4,
+  "boxShadow": "none",
+  "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
+  "buttonVariant": "SECONDARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "refresh",
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "btn_cl_ref_k",
+  "leftColumn": 48,
+  "minWidth": 100,
+  "needsErrorInfo": false,
+  "onClick": "{{ClientApp.refreshRequests()}}",
+  "parentColumnSpace": 19,
+  "parentId": "canvas_client_table_id",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "hug",
+  "rightColumn": 63,
+  "text": "Refresh",
+  "topRow": 1,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "btn_cl_refresh_id",
+  "widgetName": "btn_refresh"
+}

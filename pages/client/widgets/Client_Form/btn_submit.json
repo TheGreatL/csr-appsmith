@@ -1,0 +1,44 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 54,
+  "boxShadow": "none",
+  "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "buttonColor"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "btn_sub_k",
+  "leftColumn": 1,
+  "minWidth": 120,
+  "needsErrorInfo": false,
+  "onClick": "{{ClientApp.submitRequest()}}",
+  "parentColumnSpace": 19,
+  "parentId": "canvas_client_form_id",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 63,
+  "text": "Submit Service Request",
+  "topRow": 48,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "btn_submit_req_id",
+  "widgetName": "btn_submit"
+}

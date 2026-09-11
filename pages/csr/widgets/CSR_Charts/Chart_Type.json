@@ -1,0 +1,56 @@
+{
+  "allowScroll": false,
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 27,
+  "boxShadow": "none",
+  "chartData": {
+    "type_series": {
+      "data": "{{CSRApp.getTypeChartData()}}",
+      "seriesName": "Requests by Type"
+    }
+  },
+  "chartName": "Requests by Type (Repair vs Diagnose)",
+  "chartType": "PIE_CHART",
+  "customEChartConfig": "",
+  "customFusionChartConfig": {
+    "type": "pie2d",
+    "dataSource": {
+      "chart": {
+        "caption": "Requests by Type",
+        "theme": "fusion"
+      },
+      "data": []
+    }
+  },
+  "dynamicBindingPathList": [
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "chartData.type_series.data"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+  "isLoading": false,
+  "isVisible": true,
+  "key": "chart_type_k",
+  "leftColumn": 33,
+  "minWidth": 450,
+  "needsErrorInfo": false,
+  "parentColumnSpace": 19,
+  "parentId": "canvas_csr_charts_id",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 63,
+  "showDataPointLabel": true,
+  "topRow": 1,
+  "type": "CHART_WIDGET",
+  "version": 1,
+  "widgetId": "chart_type_id",
+  "widgetName": "Chart_Type",
+  "xAxisName": "Type",
+  "yAxisName": "Count"
+}

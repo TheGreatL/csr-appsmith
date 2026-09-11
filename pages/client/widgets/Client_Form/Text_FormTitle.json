@@ -1,0 +1,42 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 4,
+  "dynamicBindingPathList": [
+    {
+      "key": "fontFamily"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicTriggerPathList": [],
+  "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+  "fontSize": "1.1rem",
+  "fontStyle": "BOLD",
+  "isLoading": false,
+  "isVisible": true,
+  "key": "cl_form_title_k",
+  "leftColumn": 1,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "needsErrorInfo": false,
+  "overflow": "NONE",
+  "parentColumnSpace": 19,
+  "parentId": "canvas_client_form_id",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 63,
+  "shouldTruncate": false,
+  "text": "New Service Request",
+  "textAlign": "LEFT",
+  "textColor": "#1E293B",
+  "topRow": 1,
+  "type": "TEXT_WIDGET",
+  "version": 1,
+  "widgetId": "text_cl_form_title_id",
+  "widgetName": "Text_FormTitle"
+}

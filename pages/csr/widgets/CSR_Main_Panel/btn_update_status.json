@@ -1,0 +1,41 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 51,
+  "boxShadow": "none",
+  "buttonColor": "#059669",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "btn_upd_st_k",
+  "leftColumn": 42,
+  "minWidth": 120,
+  "needsErrorInfo": false,
+  "onClick": "{{CSRApp.updateStatus()}}",
+  "parentColumnSpace": 19,
+  "parentId": "canvas_csr_main_id",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 63,
+  "text": "Update Status",
+  "topRow": 46,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "btn_update_status_id",
+  "widgetName": "btn_update_status"
+}

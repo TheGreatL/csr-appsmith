@@ -1,44 +1,53 @@
 export default {
 	async onPageLoad() {
+		// 1. PAGE GUARD: Check if user is logged in
 		const user = appsmith.store.currentUser;
-		if (!user) {
-			showAlert('Please login first', 'warning');
+		if (!user || !user.email) {
+			showAlert('Access Denied: Please log in first.', 'warning');
 			navigateTo('login');
 			return;
 		}
 
+		// 2. ROLE GUARD: Client page only accessible to 'client' role
 		if (user.user_role !== 'client') {
-			showAlert('Redirecting to your assigned dashboard...', 'info');
+			showAlert(`Access Denied: Your role (${user.user_role}) cannot access the Client portal. Redirecting to CSR dashboard...`, 'info');
 			navigateTo('csr');
 			return;
 		}
 
-		// Refresh client requests
+		// 3. Load initial client data
 		await this.refreshRequests();
 	},
 
 	async submitRequest() {
 		const user = appsmith.store.currentUser;
-		const subject = input_subject ? input_subject.text.trim() : '';
-		const type = select_type ? select_type.selectedOptionValue : '';
-		const priority = select_priority ? select_priority.selectedOptionValue : 'medium';
-		const description = input_description ? input_description.text.trim() : '';
-		const location = input_location ? input_location.text.trim() : '';
+		if (!user) {
+			showAlert('Session expired. Please log in again.', 'error');
+			navigateTo('login');
+			return;
+		}
 
+		// Get form inputs
+		const subject = (typeof input_subject !== 'undefined' && input_subject.text) ? input_subject.text.trim() : '';
+		const type = (typeof select_type !== 'undefined' && select_type.selectedOptionValue) ? select_type.selectedOptionValue : '';
+		const priority = (typeof select_priority !== 'undefined' && select_priority.selectedOptionValue) ? select_priority.selectedOptionValue : 'medium';
+		const description = (typeof input_description !== 'undefined' && input_description.text) ? input_description.text.trim() : '';
+		const location = (typeof input_location !== 'undefined' && input_location.text) ? input_location.text.trim() : '';
+
+		// Validation
 		if (!subject) {
-			showAlert('Please provide a subject for the service request', 'warning');
+			showAlert('Please enter a Subject for the service request.', 'warning');
 			return;
 		}
 		if (!type) {
-			showAlert('Please select a request type (repair or diagnose)', 'warning');
+			showAlert('Please select a Request Type (Repair or Diagnose).', 'warning');
 			return;
 		}
 
 		try {
-			// Trigger the Aiven MySQL query if available
 			if (typeof Create_Service_Request !== 'undefined' && Create_Service_Request.run) {
 				await Create_Service_Request.run({
-					client_id: user ? user.user_id : 5,
+					client_id: user.user_id,
 					subject,
 					type,
 					priority,
@@ -47,17 +56,19 @@ export default {
 				});
 			}
 
-			showAlert('Service request submitted successfully!', 'success');
+			showAlert('Service request created successfully!', 'success');
 
 			// Reset input fields
 			if (typeof resetWidget === 'function') {
 				resetWidget('form_create_request', true);
+				resetWidget('input_subject', true);
+				resetWidget('input_description', true);
+				resetWidget('input_location', true);
 			}
 
-			// Reload list
 			await this.refreshRequests();
 		} catch (error) {
-			showAlert('Error submitting request: ' + (error.message || error), 'error');
+			showAlert('Failed to submit request: ' + (error.message || error), 'error');
 		}
 	},
 
@@ -67,14 +78,13 @@ export default {
 				await Get_Client_Requests.run();
 			}
 		} catch (err) {
-			console.error('Failed to fetch requests:', err);
+			console.error('Error fetching client requests:', err);
 		}
 	},
 
 	async logout() {
 		await removeValue('currentUser');
-		showAlert('Logged out successfully', 'info');
+		showAlert('Logged out successfully.', 'info');
 		navigateTo('login');
 	}
 };
-
