@@ -4,6 +4,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 17,
   "boxShadow": "none",
+  "defaultOptionValue": "",
   "dynamicBindingPathList": [
     {
       "key": "accentColor"
@@ -37,6 +38,8 @@
   "minDynamicHeight": 4,
   "minWidth": 450,
   "needsErrorInfo": false,
+  "optionLabel": "label",
+  "optionValue": "value",
   "parentColumnSpace": 19,
   "parentId": "canvas_csr_main_id",
   "parentRowSpace": 10,

@@ -41,6 +41,8 @@
   "minWidth": 120,
   "needsErrorInfo": false,
   "onOptionChange": "{{CSRApp.refreshData()}}",
+  "optionLabel": "label",
+  "optionValue": "value",
   "parentColumnSpace": 19,
   "parentId": "canvas_csr_main_id",
   "parentRowSpace": 10,
@@ -56,4 +58,3 @@
   "widgetId": "select_filter_status_id",
   "widgetName": "select_filter_status"
 }
-

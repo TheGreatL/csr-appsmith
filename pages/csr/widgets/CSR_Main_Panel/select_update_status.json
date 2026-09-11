@@ -35,6 +35,8 @@
   "minDynamicHeight": 4,
   "minWidth": 450,
   "needsErrorInfo": false,
+  "optionLabel": "label",
+  "optionValue": "value",
   "parentColumnSpace": 19,
   "parentId": "canvas_csr_main_id",
   "parentRowSpace": 10,
@@ -50,4 +52,3 @@
   "widgetId": "select_update_status_id",
   "widgetName": "select_update_status"
 }
-
