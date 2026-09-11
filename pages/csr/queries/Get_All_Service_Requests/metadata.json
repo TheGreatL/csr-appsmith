@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "",
+      "body": "SELECT \n    sr.service_request_id,\n    sr.subject,\n    sr.type,\n    sr.skill_id,\n    COALESCE(s.name, 'General') AS required_skill,\n    sr.status,\n    sr.priority,\n    sr.location,\n    sr.description,\n    sr.created_at,\n    sr.updated_at,\n    client.name AS client_name,\n    client.email AS client_email,\n    client.phone AS client_phone,\n    COALESCE(tech.user_id, NULL) AS tech_id,\n    COALESCE(tech.name, 'Unassigned') AS assigned_tech_name,\n    COALESCE(srt.notes, '') AS assignment_notes\nFROM service_request sr\nINNER JOIN users client ON sr.client_id = client.user_id\nLEFT JOIN skills s ON sr.skill_id = s.skill_id\nLEFT JOIN service_request_technicians srt ON sr.service_request_id = srt.service_request_id\nLEFT JOIN users tech ON srt.tech_id = tech.user_id\nWHERE (\n    {{ !select_filter_status.selectedOptionValue || select_filter_status.selectedOptionValue === 'all' }} \n    OR sr.status = {{ select_filter_status.selectedOptionValue }}\n)\nAND (\n    {{ !input_search.text }} \n    OR sr.subject LIKE {{ '%' + input_search.text + '%' }}\n    OR client.name LIKE {{ '%' + input_search.text + '%' }}\n)\nORDER BY \n    CASE sr.priority\n        WHEN 'urgent' THEN 1\n        WHEN 'high' THEN 2\n        WHEN 'medium' THEN 3\n        WHEN 'low' THEN 4\n        ELSE 5\n    END,\n    sr.created_at DESC;\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -33,4 +33,3 @@
     "userSetOnLoad": true
   }
 }
-

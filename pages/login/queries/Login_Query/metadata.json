@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "",
+      "body": "SELECT \n    user_id,\n    name,\n    email,\n    user_role,\n    phone\nFROM users \nWHERE email = {{ email.text.trim() }} \n  AND password = {{ password.text.trim() }}\nLIMIT 1;\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "",
+      "body": "SELECT \n    u.user_id,\n    u.name,\n    u.email,\n    u.phone,\n    COALESCE(GROUP_CONCAT(s.name ORDER BY s.name SEPARATOR ', '), 'No skills listed') AS skills_list,\n    COALESCE(GROUP_CONCAT(s.skill_id SEPARATOR ','), '') AS skill_ids\nFROM users u\nLEFT JOIN tech_skills ts ON u.user_id = ts.user_id\nLEFT JOIN skills s ON ts.skill_id = s.skill_id\nWHERE u.user_role = 'technician'\nGROUP BY u.user_id, u.name, u.email, u.phone\nORDER BY u.name ASC;\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -29,4 +29,3 @@
     "userSetOnLoad": true
   }
 }
-

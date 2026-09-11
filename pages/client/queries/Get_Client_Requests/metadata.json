@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "",
+      "body": "SELECT \n    sr.service_request_id,\n    sr.subject,\n    sr.type,\n    COALESCE(s.name, 'General') AS required_skill,\n    sr.priority,\n    sr.status,\n    sr.location,\n    sr.description,\n    sr.created_at,\n    COALESCE(tech.name, 'Pending Assignment') AS assigned_technician\nFROM service_request sr\nLEFT JOIN skills s ON sr.skill_id = s.skill_id\nLEFT JOIN service_request_technicians srt ON sr.service_request_id = srt.service_request_id\nLEFT JOIN users tech ON srt.tech_id = tech.user_id\nWHERE sr.client_id = {{ appsmith.store.currentUser ? appsmith.store.currentUser.user_id : 5 }}\nORDER BY sr.created_at DESC;\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -33,4 +33,3 @@
     "userSetOnLoad": true
   }
 }
-

@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "",
+      "body": "INSERT INTO service_request_technicians (\n    service_request_id,\n    tech_id,\n    notes\n) VALUES (\n    {{ Table_Requests.selectedRow.service_request_id }},\n    {{ select_technician.selectedOptionValue }},\n    {{ input_assign_notes.text || 'Assigned via CSR Dispatch' }}\n)\nON DUPLICATE KEY UPDATE \n    tech_id = VALUES(tech_id),\n    notes = VALUES(notes),\n    assigned_at = CURRENT_TIMESTAMP;\n\nUPDATE service_request \nSET status = 'assigned',\n    updated_at = CURRENT_TIMESTAMP\nWHERE service_request_id = {{ Table_Requests.selectedRow.service_request_id }};\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -33,4 +33,3 @@
     "userSetOnLoad": false
   }
 }
-
