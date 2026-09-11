@@ -3,14 +3,12 @@
 -- Target: Aiven MySQL 8.x / MariaDB
 -- =============================================================================
 
--- Ensure clean charset and collation
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- -----------------------------------------------------------------------------
 -- 1. USERS TABLE
 -- Stores clients, CSRs/admins, and technicians.
--- NOTE: Removed `UNIQUE` from `user_role` so multiple users can share a role.
 -- -----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -26,7 +24,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- -----------------------------------------------------------------------------
 -- 2. SKILLS TABLE
--- Categorized skills that technicians can possess.
+-- Categorized skills required for service requests and possessed by technicians.
 -- -----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS skills (
     skill_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -35,7 +33,7 @@ CREATE TABLE IF NOT EXISTS skills (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -----------------------------------------------------------------------------
--- 3. TECH_SKILLS TABLE (Junction: Users <-> Skills)
+-- 3. TECH_SKILLS TABLE (Junction: Technicians <-> Skills)
 -- Maps technicians to their certified skillsets.
 -- -----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS tech_skills (
@@ -51,11 +49,12 @@ CREATE TABLE IF NOT EXISTS tech_skills (
 -- -----------------------------------------------------------------------------
 -- 4. SERVICE_REQUEST TABLE
 -- Service tickets created by clients.
--- Includes client association, subject, type, status, and timestamps.
+-- Includes skill_id so CSR can match and assign the applicable technician.
 -- -----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS service_request (
     service_request_id INT PRIMARY KEY AUTO_INCREMENT,
     client_id INT NOT NULL,
+    skill_id INT DEFAULT NULL,
     subject VARCHAR(255) NOT NULL,
     description TEXT,
     type VARCHAR(30) NOT NULL,
@@ -65,19 +64,20 @@ CREATE TABLE IF NOT EXISTS service_request (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (client_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (skill_id) REFERENCES skills(skill_id) ON DELETE SET NULL,
     CONSTRAINT chk_request_type CHECK (type IN ('repair', 'diagnose')),
     CONSTRAINT chk_request_status CHECK (status IN ('pending', 'assigned', 'in_progress', 'completed', 'cancelled')),
     CONSTRAINT chk_request_priority CHECK (priority IN ('low', 'medium', 'high', 'urgent'))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Helpful query indexes
 CREATE INDEX idx_service_request_client ON service_request(client_id);
+CREATE INDEX idx_service_request_skill ON service_request(skill_id);
 CREATE INDEX idx_service_request_status ON service_request(status);
 CREATE INDEX idx_service_request_type ON service_request(type);
 
 -- -----------------------------------------------------------------------------
 -- 5. SERVICE_REQUEST_TECHNICIANS TABLE (Junction: Requests <-> Technicians)
--- Maps assigned technicians to service requests.
+-- Maps the assigned applicable technician to the service request.
 -- -----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS service_request_technicians (
     assignment_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -97,51 +97,56 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 
 -- =============================================================================
--- SEED DATA FOR TESTING & PROTOTYPING
+-- SEED DATA
 -- =============================================================================
 
--- Clear existing data if re-running
 DELETE FROM service_request_technicians;
 DELETE FROM service_request;
 DELETE FROM tech_skills;
 DELETE FROM skills;
 DELETE FROM users;
 
--- 1. Insert Users (Admin/CSR, Technicians, Clients)
+-- 1. Insert Users
 INSERT INTO users (user_id, name, email, password, user_role, phone) VALUES
 (1, 'Admin / CSR Specialist', 'admin@service.com', 'admin123', 'admin', '+1-555-0100'),
-(2, 'Alex Turner (Tech)', 'alex.tech@service.com', 'tech123', 'technician', '+1-555-0101'),
-(3, 'Sarah Connor (Diag Tech)', 'sarah.diag@service.com', 'tech123', 'technician', '+1-555-0102'),
-(4, 'Mike Ross (Hardware Tech)', 'mike.ross@service.com', 'tech123', 'technician', '+1-555-0103'),
-(5, 'John Doe (Acme Corp)', 'john.doe@company.com', 'client123', 'client', '+1-555-0104'),
-(6, 'Alice Smith (Starlight Labs)', 'alice.smith@startup.io', 'client123', 'client', '+1-555-0105');
+(2, 'Alex Turner', 'alex.tech@service.com', 'tech123', 'technician', '+1-555-0101'),
+(3, 'Sarah Connor', 'sarah.diag@service.com', 'tech123', 'technician', '+1-555-0102'),
+(4, 'Mike Ross', 'mike.ross@service.com', 'tech123', 'technician', '+1-555-0103'),
+(5, 'John Doe', 'john.doe@company.com', 'client123', 'client', '+1-555-0104'),
+(6, 'Alice Smith', 'alice.smith@startup.io', 'client123', 'client', '+1-555-0105');
 
 -- 2. Insert Skills
 INSERT INTO skills (skill_id, name, description) VALUES
-(1, 'Hardware Repair', 'Diagnosis and component-level repair of computing/electronic units'),
-(2, 'System Diagnostics', 'Automated and manual failure diagnostics and error code triage'),
-(3, 'Electrical Maintenance', 'High & low-voltage line diagnostics, power supplies, circuit testing'),
-(4, 'Network Diagnostics', 'LAN/WAN, router configuration, cabling, packet loss testing');
+(1, 'Hardware Repair', 'Component-level motherboard, screen, and peripheral hardware repair'),
+(2, 'System Diagnostics', 'OS level, memory failure, crash dump, and system error code diagnostics'),
+(3, 'Electrical Maintenance', 'Power supply, surge damage, and voltage line repair'),
+(4, 'Network Diagnostics', 'LAN/WAN, firewall, packet loss, and cable drop troubleshooting');
 
--- 3. Assign Skills to Technicians
+-- 3. Assign Certified Skills to Technicians
+-- Alex Turner: Hardware Repair (1), Electrical Maintenance (3)
 INSERT INTO tech_skills (user_id, skill_id, certified_date) VALUES
-(2, 1, '2023-01-15'), -- Alex: Hardware Repair
-(2, 3, '2023-04-10'), -- Alex: Electrical Maintenance
-(3, 2, '2022-11-01'), -- Sarah: System Diagnostics
-(3, 4, '2023-06-20'), -- Sarah: Network Diagnostics
-(4, 1, '2023-08-12'), -- Mike: Hardware Repair
-(4, 2, '2024-01-05'); -- Mike: System Diagnostics
+(2, 1, '2023-01-15'),
+(2, 3, '2023-04-10');
 
--- 4. Insert Sample Service Requests
-INSERT INTO service_request (service_request_id, client_id, subject, description, type, status, priority, location) VALUES
-(1, 5, 'Main Server Rack Unresponsive', 'Server rack B4 fails to boot after power outage. Needs diagnostics.', 'diagnose', 'pending', 'high', 'Building 2, Server Room B'),
-(2, 5, 'Broken Touchscreen Terminal', 'Screen cracked and touch sensor not responding on POS #3.', 'repair', 'assigned', 'medium', 'Retail Store Front'),
-(3, 6, 'Intermittent Network Drops', 'Workstations losing connection every 30 minutes during peak load.', 'diagnose', 'in_progress', 'urgent', 'East Wing Suite 400'),
-(4, 6, 'Faulty PSU Replacement', 'Power supply unit smelling burnt and failing to power workstation.', 'repair', 'completed', 'low', 'Office 12');
+-- Sarah Connor: System Diagnostics (2), Network Diagnostics (4)
+INSERT INTO tech_skills (user_id, skill_id, certified_date) VALUES
+(3, 2, '2022-11-01'),
+(3, 4, '2023-06-20');
+
+-- Mike Ross: Hardware Repair (1), System Diagnostics (2)
+INSERT INTO tech_skills (user_id, skill_id, certified_date) VALUES
+(4, 1, '2023-08-12'),
+(4, 2, '2024-01-05');
+
+-- 4. Insert Sample Service Requests (Linking Client and Required Skill)
+INSERT INTO service_request (service_request_id, client_id, skill_id, subject, description, type, status, priority, location) VALUES
+(1, 5, 2, 'Main Server Rack Unresponsive', 'Server rack B4 fails to boot after power outage. Needs diagnostics.', 'diagnose', 'pending', 'high', 'Building 2, Server Room B'),
+(2, 5, 1, 'Broken Touchscreen Terminal', 'Screen cracked and touch sensor not responding on POS #3.', 'repair', 'assigned', 'medium', 'Retail Store Front'),
+(3, 6, 4, 'Intermittent Network Drops', 'Workstations losing connection every 30 minutes during peak load.', 'diagnose', 'in_progress', 'urgent', 'East Wing Suite 400'),
+(4, 6, 3, 'Faulty PSU Replacement', 'Power supply unit smelling burnt and failing to power workstation.', 'repair', 'completed', 'low', 'Office 12');
 
 -- 5. Insert Technician Assignments
 INSERT INTO service_request_technicians (service_request_id, tech_id, notes) VALUES
-(2, 2, 'Assigned Alex Turner for screen and panel replacement.'),
-(3, 3, 'Assigned Sarah Connor for network packet capture triage.'),
-(4, 4, 'Replaced 650W gold PSU and completed stress test.');
-
+(2, 2, 'Assigned Alex Turner for POS screen replacement (matches Hardware Repair).'),
+(3, 3, 'Assigned Sarah Connor for network packet capture triage (matches Network Diagnostics).'),
+(4, 2, 'Assigned Alex Turner for electrical PSU replacement (matches Electrical Maintenance).');

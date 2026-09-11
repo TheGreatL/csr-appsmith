@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 8,
+  "bottomRow": 9,
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
@@ -34,7 +34,7 @@
   "responsiveBehavior": "fill",
   "rightColumn": 63,
   "shouldTruncate": false,
-  "text": "{{ Table_Requests.selectedRow && Table_Requests.selectedRow.service_request_id ? ('📌 Ticket #' + Table_Requests.selectedRow.service_request_id + ': ' + Table_Requests.selectedRow.subject + ' (' + Table_Requests.selectedRow.type + ' / ' + Table_Requests.selectedRow.status + ')') : '⚠️ Select a ticket from the table on the left' }}",
+  "text": "{{ Table_Requests.selectedRow && Table_Requests.selectedRow.service_request_id ? ('📌 Ticket #' + Table_Requests.selectedRow.service_request_id + ': ' + Table_Requests.selectedRow.subject + ' | Type: ' + Table_Requests.selectedRow.type.toUpperCase() + ' | Required Skill: ' + (Table_Requests.selectedRow.required_skill || 'General')) : '⚠️ Select a ticket from the table on the left to see matching technicians' }}",
   "textAlign": "LEFT",
   "textColor": "#2563EB",
   "topRow": 5,
@@ -43,4 +43,3 @@
   "widgetId": "text_csr_selected_req_id",
   "widgetName": "Text_SelectedReq"
 }
-

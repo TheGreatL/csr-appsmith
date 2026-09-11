@@ -2,7 +2,7 @@
   "accentColor": "{{appsmith.theme.colors.primaryColor}}",
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 19,
+  "bottomRow": 26,
   "boxShadow": "none",
   "defaultOptionValue": "medium",
   "dynamicBindingPathList": [
@@ -31,7 +31,7 @@
   "labelText": "Priority",
   "labelTextSize": "0.875rem",
   "labelWidth": 5,
-  "leftColumn": 33,
+  "leftColumn": 1,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
@@ -42,13 +42,12 @@
   "placeholderText": "Select priority",
   "renderMode": "CANVAS",
   "responsiveBehavior": "fill",
-  "rightColumn": 63,
+  "rightColumn": 31,
   "serverSideFiltering": false,
   "sourceData": "[\n  {\"label\": \"Low\", \"value\": \"low\"},\n  {\"label\": \"Medium\", \"value\": \"medium\"},\n  {\"label\": \"High\", \"value\": \"high\"},\n  {\"label\": \"Urgent\", \"value\": \"urgent\"}\n]",
-  "topRow": 13,
+  "topRow": 20,
   "type": "SELECT_WIDGET",
   "version": 1,
   "widgetId": "select_priority_id",
   "widgetName": "select_priority"
 }
-

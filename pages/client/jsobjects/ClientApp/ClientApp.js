@@ -1,6 +1,6 @@
 export default {
 	async onPageLoad() {
-		// 1. PAGE GUARD: Check if user is logged in
+		// 1. PAGE GUARD: Verify user session
 		const user = appsmith.store.currentUser;
 		if (!user || !user.email) {
 			showAlert('Access Denied: Please log in first.', 'warning');
@@ -8,15 +8,26 @@ export default {
 			return;
 		}
 
-		// 2. ROLE GUARD: Client page only accessible to 'client' role
+		// 2. ROLE GUARD: Client page is only for 'client' role
 		if (user.user_role !== 'client') {
 			showAlert(`Access Denied: Your role (${user.user_role}) cannot access the Client portal. Redirecting to CSR dashboard...`, 'info');
 			navigateTo('csr');
 			return;
 		}
 
-		// 3. Load initial client data
-		await this.refreshRequests();
+		// 3. Load skills catalog and client requests
+		await this.loadInitialData();
+	},
+
+	async loadInitialData() {
+		try {
+			if (typeof Get_Skills_List !== 'undefined' && Get_Skills_List.run) {
+				await Get_Skills_List.run();
+			}
+			await this.refreshRequests();
+		} catch (err) {
+			console.error('Error loading initial client data:', err);
+		}
 	},
 
 	async submitRequest() {
@@ -27,9 +38,10 @@ export default {
 			return;
 		}
 
-		// Get form inputs
+		// Gather form inputs
 		const subject = (typeof input_subject !== 'undefined' && input_subject.text) ? input_subject.text.trim() : '';
 		const type = (typeof select_type !== 'undefined' && select_type.selectedOptionValue) ? select_type.selectedOptionValue : '';
+		const skillId = (typeof select_skill !== 'undefined' && select_skill.selectedOptionValue) ? select_skill.selectedOptionValue : null;
 		const priority = (typeof select_priority !== 'undefined' && select_priority.selectedOptionValue) ? select_priority.selectedOptionValue : 'medium';
 		const description = (typeof input_description !== 'undefined' && input_description.text) ? input_description.text.trim() : '';
 		const location = (typeof input_location !== 'undefined' && input_location.text) ? input_location.text.trim() : '';
@@ -48,6 +60,7 @@ export default {
 			if (typeof Create_Service_Request !== 'undefined' && Create_Service_Request.run) {
 				await Create_Service_Request.run({
 					client_id: user.user_id,
+					skill_id: skillId,
 					subject,
 					type,
 					priority,
@@ -56,7 +69,7 @@ export default {
 				});
 			}
 
-			showAlert('Service request created successfully!', 'success');
+			showAlert('Service request created! An applicable technician will be assigned by CSR.', 'success');
 
 			// Reset input fields
 			if (typeof resetWidget === 'function') {

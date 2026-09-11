@@ -54,7 +54,7 @@
       "label": "Subject",
       "columnType": "text",
       "isVisible": true,
-      "width": 180
+      "width": 160
     },
     "type": {
       "id": "type",
@@ -62,39 +62,47 @@
       "label": "Type",
       "columnType": "text",
       "isVisible": true,
-      "width": 90
+      "width": 80
+    },
+    "required_skill": {
+      "id": "required_skill",
+      "index": 3,
+      "label": "Required Skill",
+      "columnType": "text",
+      "isVisible": true,
+      "width": 130
     },
     "priority": {
       "id": "priority",
-      "index": 3,
+      "index": 4,
       "label": "Priority",
+      "columnType": "text",
+      "isVisible": true,
+      "width": 80
+    },
+    "status": {
+      "id": "status",
+      "index": 5,
+      "label": "Status",
       "columnType": "text",
       "isVisible": true,
       "width": 90
     },
-    "status": {
-      "id": "status",
-      "index": 4,
-      "label": "Status",
-      "columnType": "text",
-      "isVisible": true,
-      "width": 100
-    },
     "assigned_technician": {
       "id": "assigned_technician",
-      "index": 5,
+      "index": 6,
       "label": "Assigned Tech",
       "columnType": "text",
       "isVisible": true,
-      "width": 140
+      "width": 130
     },
     "created_at": {
       "id": "created_at",
-      "index": 6,
+      "index": 7,
       "label": "Created At",
       "columnType": "text",
       "isVisible": true,
-      "width": 140
+      "width": 130
     }
   },
   "renderMode": "CANVAS",
@@ -108,4 +116,3 @@
   "widgetId": "tbl_client_requests_id",
   "widgetName": "Table_Client_Requests"
 }
-

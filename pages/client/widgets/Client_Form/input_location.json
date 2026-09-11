@@ -3,7 +3,7 @@
   "animateLoading": true,
   "autoFocus": false,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 27,
+  "bottomRow": 26,
   "boxShadow": "none",
   "defaultText": "",
   "dynamicBindingPathList": [
@@ -28,7 +28,7 @@
   "labelPosition": "Top",
   "labelTextSize": "0.875rem",
   "labelWidth": 5,
-  "leftColumn": 1,
+  "leftColumn": 33,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
@@ -49,4 +49,3 @@
   "widgetId": "input_location_id",
   "widgetName": "input_location"
 }
-

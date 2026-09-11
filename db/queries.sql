@@ -1,7 +1,6 @@
 -- =============================================================================
 -- APPSMITH SQL QUERIES FOR AIVEN MYSQL DATASOURCE
--- Copy and paste these into your Appsmith queries editor or inspect below.
--- Mustache tags like {{...}} are dynamically evaluated by Appsmith.
+-- Service Request Lifecycle: Client Creation -> CSR Applicable Tech Assignment
 -- =============================================================================
 
 -- -----------------------------------------------------------------------------
@@ -21,35 +20,26 @@ LIMIT 1;
 
 
 -- -----------------------------------------------------------------------------
--- 2. CLIENT SERVICE REQUESTS (Page: client)
--- Query Name: Get_Client_Requests
--- Fetches only the requests belonging to the logged-in client.
+-- 2. FETCH SKILLS LIST (Pages: client, csr)
+-- Query Name: Get_Skills_List
+-- Used in Client form dropdown to choose required skill, and in CSR filters.
 -- -----------------------------------------------------------------------------
 SELECT 
-    sr.service_request_id,
-    sr.subject,
-    sr.description,
-    sr.type,
-    sr.status,
-    sr.priority,
-    sr.location,
-    sr.created_at,
-    sr.updated_at,
-    COALESCE(tech.name, 'Unassigned') AS assigned_technician
-FROM service_request sr
-LEFT JOIN service_request_technicians srt ON sr.service_request_id = srt.service_request_id
-LEFT JOIN users tech ON srt.tech_id = tech.user_id
-WHERE sr.client_id = {{ appsmith.store.currentUser ? appsmith.store.currentUser.user_id : 5 }}
-ORDER BY sr.created_at DESC;
+    skill_id,
+    name,
+    description
+FROM skills 
+ORDER BY name ASC;
 
 
 -- -----------------------------------------------------------------------------
--- 3. CREATE SERVICE REQUEST (Page: client)
+-- 3. CLIENT: CREATE SERVICE REQUEST (Page: client)
 -- Query Name: Create_Service_Request
--- Submits a new repair or diagnostic request.
+-- Submits a new ticket with Subject, Type, Required Skill, and Description.
 -- -----------------------------------------------------------------------------
 INSERT INTO service_request (
     client_id,
+    skill_id,
     subject,
     type,
     priority,
@@ -58,24 +48,51 @@ INSERT INTO service_request (
     status
 ) VALUES (
     {{ appsmith.store.currentUser ? appsmith.store.currentUser.user_id : 5 }},
-    {{ input_subject.text }},
+    {{ select_skill.selectedOptionValue || null }},
+    {{ input_subject.text.trim() }},
     {{ select_type.selectedOptionValue }},
     {{ select_priority.selectedOptionValue || 'medium' }},
-    {{ input_description.text }},
-    {{ input_location.text || 'N/A' }},
+    {{ input_description.text.trim() }},
+    {{ input_location.text.trim() || 'N/A' }},
     'pending'
 );
 
 
 -- -----------------------------------------------------------------------------
--- 4. CSR / ADMIN: FETCH ALL REQUESTS (Page: csr)
--- Query Name: Get_All_Service_Requests
--- Supports optional filtering by status (from a Select/Tabs widget) and search.
+-- 4. CLIENT: VIEW MY SERVICE REQUESTS (Page: client)
+-- Query Name: Get_Client_Requests
+-- Displays client's own tickets with live status and assigned technician.
 -- -----------------------------------------------------------------------------
 SELECT 
     sr.service_request_id,
     sr.subject,
     sr.type,
+    COALESCE(s.name, 'General') AS required_skill,
+    sr.priority,
+    sr.status,
+    sr.location,
+    sr.description,
+    sr.created_at,
+    COALESCE(tech.name, 'Pending Assignment') AS assigned_technician
+FROM service_request sr
+LEFT JOIN skills s ON sr.skill_id = s.skill_id
+LEFT JOIN service_request_technicians srt ON sr.service_request_id = srt.service_request_id
+LEFT JOIN users tech ON srt.tech_id = tech.user_id
+WHERE sr.client_id = {{ appsmith.store.currentUser ? appsmith.store.currentUser.user_id : 5 }}
+ORDER BY sr.created_at DESC;
+
+
+-- -----------------------------------------------------------------------------
+-- 5. CSR / ADMIN: FETCH ALL REQUESTS (Page: csr)
+-- Query Name: Get_All_Service_Requests
+-- Includes client details, required skill, and assigned technician.
+-- -----------------------------------------------------------------------------
+SELECT 
+    sr.service_request_id,
+    sr.subject,
+    sr.type,
+    sr.skill_id,
+    COALESCE(s.name, 'General') AS required_skill,
     sr.status,
     sr.priority,
     sr.location,
@@ -90,6 +107,7 @@ SELECT
     COALESCE(srt.notes, '') AS assignment_notes
 FROM service_request sr
 INNER JOIN users client ON sr.client_id = client.user_id
+LEFT JOIN skills s ON sr.skill_id = s.skill_id
 LEFT JOIN service_request_technicians srt ON sr.service_request_id = srt.service_request_id
 LEFT JOIN users tech ON srt.tech_id = tech.user_id
 WHERE (
@@ -113,16 +131,17 @@ ORDER BY
 
 
 -- -----------------------------------------------------------------------------
--- 5. CSR: GET TECHNICIANS & THEIR SKILLS (Page: csr)
+-- 6. CSR: GET TECHNICIANS & THEIR CERTIFIED SKILLS (Page: csr)
 -- Query Name: Get_Technicians_List
--- Lists all technicians with grouped skill tags to aid assignment.
+-- Returns technicians with comma-separated skills and list of skill IDs.
 -- -----------------------------------------------------------------------------
 SELECT 
     u.user_id,
     u.name,
     u.email,
     u.phone,
-    COALESCE(GROUP_CONCAT(s.name SEPARATOR ', '), 'No skills listed') AS skills_list
+    COALESCE(GROUP_CONCAT(s.name ORDER BY s.name SEPARATOR ', '), 'No skills listed') AS skills_list,
+    COALESCE(GROUP_CONCAT(s.skill_id SEPARATOR ','), '') AS skill_ids
 FROM users u
 LEFT JOIN tech_skills ts ON u.user_id = ts.user_id
 LEFT JOIN skills s ON ts.skill_id = s.skill_id
@@ -132,9 +151,9 @@ ORDER BY u.name ASC;
 
 
 -- -----------------------------------------------------------------------------
--- 6. CSR: ASSIGN TECHNICIAN TO SERVICE REQUEST (Page: csr)
+-- 7. CSR: ASSIGN APPLICABLE TECHNICIAN (Page: csr)
 -- Query Name: Assign_Technician_To_Request
--- Inserts/replaces technician assignment and updates request status to 'assigned'.
+-- Links chosen technician to the ticket and updates status to 'assigned'.
 -- -----------------------------------------------------------------------------
 INSERT INTO service_request_technicians (
     service_request_id,
@@ -143,21 +162,21 @@ INSERT INTO service_request_technicians (
 ) VALUES (
     {{ Table_Requests.selectedRow.service_request_id }},
     {{ select_technician.selectedOptionValue }},
-    {{ input_assign_notes.text || 'Assigned via CSR Portal' }}
+    {{ input_assign_notes.text || 'Assigned via CSR Dispatch' }}
 )
 ON DUPLICATE KEY UPDATE 
     tech_id = VALUES(tech_id),
     notes = VALUES(notes),
     assigned_at = CURRENT_TIMESTAMP;
 
--- Immediately followed by updating request status:
 UPDATE service_request 
-SET status = 'assigned'
+SET status = 'assigned',
+    updated_at = CURRENT_TIMESTAMP
 WHERE service_request_id = {{ Table_Requests.selectedRow.service_request_id }};
 
 
 -- -----------------------------------------------------------------------------
--- 7. CSR / TECH: UPDATE REQUEST STATUS (Page: csr)
+-- 8. CSR / TECH: UPDATE STATUS (Page: csr)
 -- Query Name: Update_Request_Status
 -- -----------------------------------------------------------------------------
 UPDATE service_request 
@@ -168,7 +187,7 @@ WHERE service_request_id = {{ Table_Requests.selectedRow.service_request_id }};
 
 
 -- -----------------------------------------------------------------------------
--- 8. CSR METRICS / COUNTERS (Page: csr)
+-- 9. CSR KPI METRICS (Page: csr)
 -- Query Name: Get_Request_Metrics
 -- -----------------------------------------------------------------------------
 SELECT 
@@ -178,4 +197,3 @@ SELECT
     SUM(CASE WHEN status = 'in_progress' THEN 1 ELSE 0 END) AS in_progress_count,
     SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) AS completed_count
 FROM service_request;
-
