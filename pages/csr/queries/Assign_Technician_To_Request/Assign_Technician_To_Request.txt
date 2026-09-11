@@ -1,0 +1,18 @@
+INSERT INTO service_request_technicians (
+    service_request_id,
+    tech_id,
+    notes
+) VALUES (
+    {{ Table_Requests.selectedRow.service_request_id }},
+    {{ select_technician.selectedOptionValue }},
+    {{ input_assign_notes.text || 'Assigned via CSR Dispatch' }}
+)
+ON DUPLICATE KEY UPDATE 
+    tech_id = VALUES(tech_id),
+    notes = VALUES(notes),
+    assigned_at = CURRENT_TIMESTAMP;
+
+UPDATE service_request 
+SET status = 'assigned',
+    updated_at = CURRENT_TIMESTAMP
+WHERE service_request_id = {{ Table_Requests.selectedRow.service_request_id }};

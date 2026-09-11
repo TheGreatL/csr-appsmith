@@ -1,0 +1,13 @@
+SELECT 
+    u.user_id,
+    u.name,
+    u.email,
+    u.phone,
+    COALESCE(GROUP_CONCAT(s.name ORDER BY s.name SEPARATOR ', '), 'No skills listed') AS skills_list,
+    COALESCE(GROUP_CONCAT(s.skill_id SEPARATOR ','), '') AS skill_ids
+FROM users u
+LEFT JOIN tech_skills ts ON u.user_id = ts.user_id
+LEFT JOIN skills s ON ts.skill_id = s.skill_id
+WHERE u.user_role = 'technician'
+GROUP BY u.user_id, u.name, u.email, u.phone
+ORDER BY u.name ASC;

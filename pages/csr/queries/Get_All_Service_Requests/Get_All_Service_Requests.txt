@@ -1,0 +1,41 @@
+SELECT 
+    sr.service_request_id,
+    sr.subject,
+    sr.type,
+    sr.skill_id,
+    COALESCE(s.name, 'General') AS required_skill,
+    sr.status,
+    sr.priority,
+    sr.location,
+    sr.description,
+    sr.created_at,
+    sr.updated_at,
+    client.name AS client_name,
+    client.email AS client_email,
+    client.phone AS client_phone,
+    COALESCE(tech.user_id, NULL) AS tech_id,
+    COALESCE(tech.name, 'Unassigned') AS assigned_tech_name,
+    COALESCE(srt.notes, '') AS assignment_notes
+FROM service_request sr
+INNER JOIN users client ON sr.client_id = client.user_id
+LEFT JOIN skills s ON sr.skill_id = s.skill_id
+LEFT JOIN service_request_technicians srt ON sr.service_request_id = srt.service_request_id
+LEFT JOIN users tech ON srt.tech_id = tech.user_id
+WHERE (
+    {{ !select_filter_status.selectedOptionValue || select_filter_status.selectedOptionValue === 'all' }} 
+    OR sr.status = {{ select_filter_status.selectedOptionValue }}
+)
+AND (
+    {{ !input_search.text }} 
+    OR sr.subject LIKE {{ '%' + input_search.text + '%' }}
+    OR client.name LIKE {{ '%' + input_search.text + '%' }}
+)
+ORDER BY 
+    CASE sr.priority
+        WHEN 'urgent' THEN 1
+        WHEN 'high' THEN 2
+        WHEN 'medium' THEN 3
+        WHEN 'low' THEN 4
+        ELSE 5
+    END,
+    sr.created_at DESC;

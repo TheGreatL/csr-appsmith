@@ -1,0 +1,17 @@
+SELECT 
+    sr.service_request_id,
+    sr.subject,
+    sr.type,
+    COALESCE(s.name, 'General') AS required_skill,
+    sr.priority,
+    sr.status,
+    sr.location,
+    sr.description,
+    sr.created_at,
+    COALESCE(tech.name, 'Pending Assignment') AS assigned_technician
+FROM service_request sr
+LEFT JOIN skills s ON sr.skill_id = s.skill_id
+LEFT JOIN service_request_technicians srt ON sr.service_request_id = srt.service_request_id
+LEFT JOIN users tech ON srt.tech_id = tech.user_id
+WHERE sr.client_id = {{ appsmith.store.currentUser ? appsmith.store.currentUser.user_id : 5 }}
+ORDER BY sr.created_at DESC;

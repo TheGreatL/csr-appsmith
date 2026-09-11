@@ -1,0 +1,6 @@
+SELECT 
+    skill_id,
+    name,
+    description
+FROM skills 
+ORDER BY name ASC;

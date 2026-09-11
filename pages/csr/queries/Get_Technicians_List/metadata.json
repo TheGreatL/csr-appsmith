@@ -1,6 +1,6 @@
 {
-  "gitSyncId": "6aa4000273ec81215b1a4018_060007bb-0533-407e-ab5b-b452a0024ea4",
-  "id": "login_Login_Query",
+  "gitSyncId": "6aa4000273ec81215b1a4018_csr_Get_Technicians_List_qry",
+  "id": "csr_Get_Technicians_List",
   "pluginId": "mysql-plugin",
   "pluginType": "DB",
   "unpublishedAction": {
@@ -22,14 +22,10 @@
       "name": "TestAppDatabase",
       "pluginId": "mysql-plugin"
     },
-    "dynamicBindingPathList": [
-      {
-        "key": "body"
-      }
-    ],
-    "name": "Login_Query",
-    "pageId": "login",
-    "runBehaviour": "MANUAL",
-    "userSetOnLoad": false
+    "dynamicBindingPathList": [],
+    "name": "Get_Technicians_List",
+    "pageId": "csr",
+    "runBehaviour": "ON_PAGE_LOAD",
+    "userSetOnLoad": true
   }
 }

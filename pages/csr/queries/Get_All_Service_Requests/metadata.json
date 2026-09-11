@@ -1,6 +1,6 @@
 {
-  "gitSyncId": "6aa4000273ec81215b1a4018_060007bb-0533-407e-ab5b-b452a0024ea4",
-  "id": "login_Login_Query",
+  "gitSyncId": "6aa4000273ec81215b1a4018_csr_Get_All_Service_Requests_qry",
+  "id": "csr_Get_All_Service_Requests",
   "pluginId": "mysql-plugin",
   "pluginType": "DB",
   "unpublishedAction": {
@@ -27,9 +27,9 @@
         "key": "body"
       }
     ],
-    "name": "Login_Query",
-    "pageId": "login",
-    "runBehaviour": "MANUAL",
-    "userSetOnLoad": false
+    "name": "Get_All_Service_Requests",
+    "pageId": "csr",
+    "runBehaviour": "ON_PAGE_LOAD",
+    "userSetOnLoad": true
   }
 }
