@@ -8,3 +8,4 @@ FROM users
 WHERE email = {{ email.text.trim() }} 
   AND password = {{ password.text.trim() }}
 LIMIT 1;
+

@@ -15,3 +15,4 @@ LEFT JOIN service_request_technicians srt ON sr.service_request_id = srt.service
 LEFT JOIN users tech ON srt.tech_id = tech.user_id
 WHERE sr.client_id = {{ appsmith.store.currentUser ? appsmith.store.currentUser.user_id : 5 }}
 ORDER BY sr.created_at DESC;
+

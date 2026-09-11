@@ -11,3 +11,4 @@ LEFT JOIN skills s ON ts.skill_id = s.skill_id
 WHERE u.user_role = 'technician'
 GROUP BY u.user_id, u.name, u.email, u.phone
 ORDER BY u.name ASC;
+

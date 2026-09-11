@@ -3,3 +3,4 @@ SET
     status = {{ select_update_status.selectedOptionValue }},
     updated_at = CURRENT_TIMESTAMP
 WHERE service_request_id = {{ Table_Requests.selectedRow.service_request_id }};
+

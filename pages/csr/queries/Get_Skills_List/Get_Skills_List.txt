@@ -4,3 +4,4 @@ SELECT
     description
 FROM skills 
 ORDER BY name ASC;
+

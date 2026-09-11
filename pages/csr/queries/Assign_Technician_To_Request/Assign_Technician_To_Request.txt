@@ -16,3 +16,4 @@ UPDATE service_request
 SET status = 'assigned',
     updated_at = CURRENT_TIMESTAMP
 WHERE service_request_id = {{ Table_Requests.selectedRow.service_request_id }};
+

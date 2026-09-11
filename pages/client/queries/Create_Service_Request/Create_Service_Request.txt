@@ -17,3 +17,4 @@ INSERT INTO service_request (
     {{ input_location.text.trim() || 'N/A' }},
     'pending'
 );
+
