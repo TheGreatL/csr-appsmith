@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 23,
+  "bottomRow": 4,
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
@@ -19,11 +19,11 @@
   "dynamicHeight": "AUTO_HEIGHT",
   "dynamicTriggerPathList": [],
   "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
-  "fontSize": "0.9rem",
+  "fontSize": "1.15rem",
   "fontStyle": "BOLD",
   "isLoading": false,
   "isVisible": "{{ !!Table_Requests.selectedRow && !!Table_Requests.selectedRow.service_request_id }}",
-  "key": "csr_sel_req_k",
+  "key": "csr_dtl_hdr_k",
   "leftColumn": 39,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
@@ -37,12 +37,12 @@
   "responsiveBehavior": "fill",
   "rightColumn": 63,
   "shouldTruncate": false,
-  "text": "{{ '⚡ Current Status: ' + (Table_Requests.selectedRow.status ? Table_Requests.selectedRow.status.toUpperCase() : 'PENDING') + ' | Assigned Tech: ' + (Table_Requests.selectedRow.assigned_tech_name || 'Unassigned') }}",
+  "text": "{{ '📌 Request #' + Table_Requests.selectedRow.service_request_id + ': ' + Table_Requests.selectedRow.subject }}",
   "textAlign": "LEFT",
-  "textColor": "#047857",
-  "topRow": 20,
+  "textColor": "#1E293B",
+  "topRow": 1,
   "type": "TEXT_WIDGET",
   "version": 1,
-  "widgetId": "text_csr_selected_req_id",
-  "widgetName": "Text_SelectedReq"
+  "widgetId": "text_csr_detail_hdr_id",
+  "widgetName": "Text_DetailHeader"
 }

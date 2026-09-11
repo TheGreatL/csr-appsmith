@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 23,
+  "bottomRow": 8,
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
@@ -19,11 +19,11 @@
   "dynamicHeight": "AUTO_HEIGHT",
   "dynamicTriggerPathList": [],
   "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
-  "fontSize": "0.9rem",
-  "fontStyle": "BOLD",
+  "fontSize": "0.875rem",
+  "fontStyle": "REGULAR",
   "isLoading": false,
   "isVisible": "{{ !!Table_Requests.selectedRow && !!Table_Requests.selectedRow.service_request_id }}",
-  "key": "csr_sel_req_k",
+  "key": "csr_cl_info_k",
   "leftColumn": 39,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
@@ -37,12 +37,12 @@
   "responsiveBehavior": "fill",
   "rightColumn": 63,
   "shouldTruncate": false,
-  "text": "{{ '⚡ Current Status: ' + (Table_Requests.selectedRow.status ? Table_Requests.selectedRow.status.toUpperCase() : 'PENDING') + ' | Assigned Tech: ' + (Table_Requests.selectedRow.assigned_tech_name || 'Unassigned') }}",
+  "text": "{{ '👤 Client: ' + (Table_Requests.selectedRow.client_name || 'N/A') + ' | 📧 ' + (Table_Requests.selectedRow.client_email || 'N/A') + ' | 📞 ' + (Table_Requests.selectedRow.client_phone || 'N/A') }}",
   "textAlign": "LEFT",
-  "textColor": "#047857",
-  "topRow": 20,
+  "textColor": "#475569",
+  "topRow": 5,
   "type": "TEXT_WIDGET",
   "version": 1,
-  "widgetId": "text_csr_selected_req_id",
-  "widgetName": "Text_SelectedReq"
+  "widgetId": "text_csr_client_info_id",
+  "widgetName": "Text_ClientInfo"
 }

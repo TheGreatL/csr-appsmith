@@ -2,7 +2,7 @@
   "accentColor": "{{appsmith.theme.colors.primaryColor}}",
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 44,
+  "bottomRow": 53,
   "boxShadow": "none",
   "defaultOptionValue": "in_progress",
   "dynamicBindingPathList": [
@@ -11,6 +11,9 @@
     },
     {
       "key": "borderRadius"
+    },
+    {
+      "key": "isVisible"
     }
   ],
   "dynamicPropertyPathList": [
@@ -23,14 +26,14 @@
   "isFilterable": false,
   "isLoading": false,
   "isRequired": false,
-  "isVisible": true,
+  "isVisible": "{{ !!Table_Requests.selectedRow && !!Table_Requests.selectedRow.service_request_id }}",
   "key": "sel_upd_st_k",
   "labelAlignment": "left",
   "labelPosition": "Top",
   "labelText": "Change Status for Selected Ticket",
   "labelTextSize": "0.875rem",
   "labelWidth": 5,
-  "leftColumn": 42,
+  "leftColumn": 39,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
@@ -46,7 +49,7 @@
   "rightColumn": 63,
   "serverSideFiltering": false,
   "sourceData": "[\n  {\"label\": \"Pending\", \"value\": \"pending\"},\n  {\"label\": \"Assigned\", \"value\": \"assigned\"},\n  {\"label\": \"In Progress\", \"value\": \"in_progress\"},\n  {\"label\": \"Completed\", \"value\": \"completed\"},\n  {\"label\": \"Cancelled\", \"value\": \"cancelled\"}\n]",
-  "topRow": 37,
+  "topRow": 47,
   "type": "SELECT_WIDGET",
   "version": 1,
   "widgetId": "select_update_status_id",

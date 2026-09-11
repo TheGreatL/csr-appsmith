@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 23,
+  "bottomRow": 26,
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
@@ -11,19 +11,16 @@
     },
     {
       "key": "isVisible"
-    },
-    {
-      "key": "text"
     }
   ],
   "dynamicHeight": "AUTO_HEIGHT",
   "dynamicTriggerPathList": [],
   "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
-  "fontSize": "0.9rem",
-  "fontStyle": "BOLD",
+  "fontSize": "1.05rem",
+  "fontStyle": "REGULAR",
   "isLoading": false,
-  "isVisible": "{{ !!Table_Requests.selectedRow && !!Table_Requests.selectedRow.service_request_id }}",
-  "key": "csr_sel_req_k",
+  "isVisible": "{{ !Table_Requests.selectedRow || !Table_Requests.selectedRow.service_request_id }}",
+  "key": "no_sel_k",
   "leftColumn": 39,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
@@ -37,12 +34,12 @@
   "responsiveBehavior": "fill",
   "rightColumn": 63,
   "shouldTruncate": false,
-  "text": "{{ '⚡ Current Status: ' + (Table_Requests.selectedRow.status ? Table_Requests.selectedRow.status.toUpperCase() : 'PENDING') + ' | Assigned Tech: ' + (Table_Requests.selectedRow.assigned_tech_name || 'Unassigned') }}",
-  "textAlign": "LEFT",
-  "textColor": "#047857",
-  "topRow": 20,
+  "text": "👈 Select any service request from the queue on the left to display its complete details, client information, and dispatch an applicable technician.",
+  "textAlign": "CENTER",
+  "textColor": "#64748B",
+  "topRow": 10,
   "type": "TEXT_WIDGET",
   "version": 1,
-  "widgetId": "text_csr_selected_req_id",
-  "widgetName": "Text_SelectedReq"
+  "widgetId": "text_no_sel_notice_id",
+  "widgetName": "Text_NoSelectionNotice"
 }

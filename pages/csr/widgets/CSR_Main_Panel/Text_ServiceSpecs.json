@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 23,
+  "bottomRow": 12,
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
@@ -19,11 +19,11 @@
   "dynamicHeight": "AUTO_HEIGHT",
   "dynamicTriggerPathList": [],
   "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
-  "fontSize": "0.9rem",
+  "fontSize": "0.875rem",
   "fontStyle": "BOLD",
   "isLoading": false,
   "isVisible": "{{ !!Table_Requests.selectedRow && !!Table_Requests.selectedRow.service_request_id }}",
-  "key": "csr_sel_req_k",
+  "key": "csr_specs_k",
   "leftColumn": 39,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
@@ -37,12 +37,12 @@
   "responsiveBehavior": "fill",
   "rightColumn": 63,
   "shouldTruncate": false,
-  "text": "{{ '⚡ Current Status: ' + (Table_Requests.selectedRow.status ? Table_Requests.selectedRow.status.toUpperCase() : 'PENDING') + ' | Assigned Tech: ' + (Table_Requests.selectedRow.assigned_tech_name || 'Unassigned') }}",
+  "text": "{{ '🛠️ Type: ' + (Table_Requests.selectedRow.type ? Table_Requests.selectedRow.type.toUpperCase() : '') + ' | Required Skill: ' + (Table_Requests.selectedRow.required_skill || 'General') + ' | Priority: ' + (Table_Requests.selectedRow.priority ? Table_Requests.selectedRow.priority.toUpperCase() : 'MEDIUM') + ' | Location: ' + (Table_Requests.selectedRow.location || 'N/A') }}",
   "textAlign": "LEFT",
-  "textColor": "#047857",
-  "topRow": 20,
+  "textColor": "#2563EB",
+  "topRow": 9,
   "type": "TEXT_WIDGET",
   "version": 1,
-  "widgetId": "text_csr_selected_req_id",
-  "widgetName": "Text_SelectedReq"
+  "widgetId": "text_csr_specs_id",
+  "widgetName": "Text_ServiceSpecs"
 }

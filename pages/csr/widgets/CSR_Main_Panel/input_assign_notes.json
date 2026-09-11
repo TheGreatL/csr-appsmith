@@ -3,7 +3,7 @@
   "animateLoading": true,
   "autoFocus": false,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 27,
+  "bottomRow": 39,
   "boxShadow": "none",
   "defaultText": "",
   "dynamicBindingPathList": [
@@ -12,6 +12,9 @@
     },
     {
       "key": "borderRadius"
+    },
+    {
+      "key": "isVisible"
     }
   ],
   "dynamicHeight": "FIXED",
@@ -21,14 +24,14 @@
   "isDisabled": false,
   "isLoading": false,
   "isRequired": false,
-  "isVisible": true,
+  "isVisible": "{{ !!Table_Requests.selectedRow && !!Table_Requests.selectedRow.service_request_id }}",
   "key": "inp_asg_notes_k",
-  "label": "Assignment Instructions / Notes",
+  "label": "Dispatch Instructions / Notes",
   "labelAlignment": "left",
   "labelPosition": "Top",
   "labelTextSize": "0.875rem",
   "labelWidth": 5,
-  "leftColumn": 42,
+  "leftColumn": 39,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
@@ -36,17 +39,16 @@
   "parentColumnSpace": 19,
   "parentId": "canvas_csr_main_id",
   "parentRowSpace": 10,
-  "placeholderText": "e.g., Check power rails and replace blown capacitor",
+  "placeholderText": "e.g., Check power supply line and swap capacitor",
   "renderMode": "CANVAS",
   "resetOnSubmit": true,
   "responsiveBehavior": "fill",
   "rightColumn": 63,
   "shouldAllowAutofill": false,
   "showStepArrows": false,
-  "topRow": 19,
+  "topRow": 32,
   "type": "INPUT_WIDGET_V2",
   "version": 2,
   "widgetId": "input_assign_notes_id",
   "widgetName": "input_assign_notes"
 }
-

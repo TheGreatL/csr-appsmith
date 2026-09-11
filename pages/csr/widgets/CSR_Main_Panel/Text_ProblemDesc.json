@@ -1,24 +1,30 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 4,
+  "bottomRow": 19,
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
     },
     {
       "key": "borderRadius"
+    },
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "text"
     }
   ],
   "dynamicHeight": "AUTO_HEIGHT",
   "dynamicTriggerPathList": [],
   "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
-  "fontSize": "1.1rem",
-  "fontStyle": "BOLD",
+  "fontSize": "0.875rem",
+  "fontStyle": "REGULAR",
   "isLoading": false,
-  "isVisible": true,
-  "key": "csr_dsp_title_k",
-  "leftColumn": 42,
+  "isVisible": "{{ !!Table_Requests.selectedRow && !!Table_Requests.selectedRow.service_request_id }}",
+  "key": "csr_pdesc_k",
+  "leftColumn": 39,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
@@ -31,13 +37,12 @@
   "responsiveBehavior": "fill",
   "rightColumn": 63,
   "shouldTruncate": false,
-  "text": "Technician Dispatch & Assignment",
+  "text": "{{ '📝 Problem Description:\\n' + (Table_Requests.selectedRow.description || 'No detailed description provided.') }}",
   "textAlign": "LEFT",
-  "textColor": "#1E293B",
-  "topRow": 1,
+  "textColor": "#334155",
+  "topRow": 13,
   "type": "TEXT_WIDGET",
   "version": 1,
-  "widgetId": "text_csr_dispatch_title_id",
-  "widgetName": "Text_DispatchTitle"
+  "widgetId": "text_csr_problem_desc_id",
+  "widgetName": "Text_ProblemDesc"
 }
-

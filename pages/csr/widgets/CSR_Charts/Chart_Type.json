@@ -10,7 +10,7 @@
       "seriesName": "Requests by Type"
     }
   },
-  "chartName": "Requests by Type (Repair vs Diagnose)",
+  "chartName": "Requests by Type (Click Slice to Filter Table)",
   "chartType": "PIE_CHART",
   "customEChartConfig": "",
   "customFusionChartConfig": {
@@ -31,7 +31,11 @@
       "key": "chartData.type_series.data"
     }
   ],
-  "dynamicTriggerPathList": [],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onDataPointClick"
+    }
+  ],
   "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
   "isLoading": false,
   "isVisible": true,
@@ -39,6 +43,7 @@
   "leftColumn": 33,
   "minWidth": 450,
   "needsErrorInfo": false,
+  "onDataPointClick": "{{CSRApp.onChartTypeClick()}}",
   "parentColumnSpace": 19,
   "parentId": "canvas_csr_charts_id",
   "parentRowSpace": 10,
@@ -54,4 +59,3 @@
   "xAxisName": "Type",
   "yAxisName": "Count"
 }
-

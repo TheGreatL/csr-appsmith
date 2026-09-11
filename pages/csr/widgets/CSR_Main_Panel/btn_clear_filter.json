@@ -1,10 +1,10 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 59,
+  "bottomRow": 5,
   "boxShadow": "none",
-  "buttonColor": "#059669",
-  "buttonVariant": "PRIMARY",
+  "buttonColor": "#64748B",
+  "buttonVariant": "SECONDARY",
   "disabledWhenInvalid": false,
   "dynamicBindingPathList": [
     {
@@ -19,26 +19,28 @@
       "key": "onClick"
     }
   ],
+  "iconAlign": "left",
+  "iconName": "cross",
   "isDefaultClickDisabled": true,
   "isDisabled": false,
   "isLoading": false,
-  "isVisible": "{{ !!Table_Requests.selectedRow && !!Table_Requests.selectedRow.service_request_id }}",
-  "key": "btn_upd_st_k",
-  "leftColumn": 39,
-  "minWidth": 120,
+  "isVisible": "{{ !!appsmith.store.selectedStatusFilter || !!appsmith.store.selectedTypeFilter }}",
+  "key": "btn_clr_flt_k",
+  "leftColumn": 30,
+  "minWidth": 90,
   "needsErrorInfo": false,
-  "onClick": "{{CSRApp.updateStatus()}}",
+  "onClick": "{{ CSRApp.clearFilters() }}",
   "parentColumnSpace": 19,
   "parentId": "canvas_csr_main_id",
   "parentRowSpace": 10,
   "placement": "CENTER",
   "renderMode": "CANVAS",
-  "responsiveBehavior": "fill",
-  "rightColumn": 63,
-  "text": "Update Ticket Status",
-  "topRow": 54,
+  "responsiveBehavior": "hug",
+  "rightColumn": 37,
+  "text": "Reset Filter",
+  "topRow": 1,
   "type": "BUTTON_WIDGET",
   "version": 1,
-  "widgetId": "btn_update_status_id",
-  "widgetName": "btn_update_status"
+  "widgetId": "btn_clear_filter_id",
+  "widgetName": "btn_clear_filter"
 }
