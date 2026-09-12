@@ -1,5 +1,8 @@
 export default {
 	async onPageLoad() {
+		if(appsmith.mode=="edit"){
+			return;
+		}
 		// 1. PAGE GUARD: Verify user session
 		const user = appsmith.store.currentUser;
 		if (!user || !user.email) {
@@ -72,24 +75,24 @@ export default {
 	// Filtered requests source for the Table
 	getFilteredRequests() {
 		const requests = (typeof Get_All_Service_Requests !== 'undefined' && Get_All_Service_Requests.data) 
-			? Get_All_Service_Requests.data 
-			: [];
+		? Get_All_Service_Requests.data 
+		: [];
 
 		const statusFilter = appsmith.store.selectedStatusFilter || 
-			((typeof select_filter_status !== 'undefined') ? select_filter_status.selectedOptionValue : 'all');
+					((typeof select_filter_status !== 'undefined') ? select_filter_status.selectedOptionValue : 'all');
 		const typeFilter = appsmith.store.selectedTypeFilter || 'all';
 		const searchKeyword = (typeof input_search !== 'undefined' && input_search.text) 
-			? input_search.text.trim().toLowerCase() 
-			: '';
+		? input_search.text.trim().toLowerCase() 
+		: '';
 
 		return requests.filter(r => {
 			const matchesStatus = (!statusFilter || statusFilter === 'all' || (r.status || '').toLowerCase() === statusFilter.toLowerCase());
 			const matchesType = (!typeFilter || typeFilter === 'all' || (r.type || '').toLowerCase() === typeFilter.toLowerCase());
 			const matchesSearch = (!searchKeyword || 
-				(r.subject || '').toLowerCase().includes(searchKeyword) || 
-				(r.client_name || '').toLowerCase().includes(searchKeyword) ||
-				String(r.service_request_id).includes(searchKeyword)
-			);
+														 (r.subject || '').toLowerCase().includes(searchKeyword) || 
+														 (r.client_name || '').toLowerCase().includes(searchKeyword) ||
+														 String(r.service_request_id).includes(searchKeyword)
+														);
 			return matchesStatus && matchesType && matchesSearch;
 		});
 	},
@@ -98,12 +101,12 @@ export default {
 	getApplicableTechnicians() {
 		const selectedReq = (typeof Table_Requests !== 'undefined') ? Table_Requests.selectedRow : null;
 		const allTechs = (typeof Get_Technicians_List !== 'undefined' && Get_Technicians_List.data) 
-			? Get_Technicians_List.data 
-			: [
-				{ user_id: 2, name: 'Alex Turner', skills_list: 'Hardware Repair, Electrical Maintenance', skill_ids: '1,3' },
-				{ user_id: 3, name: 'Sarah Connor', skills_list: 'System Diagnostics, Network Diagnostics', skill_ids: '2,4' },
-				{ user_id: 4, name: 'Mike Ross', skills_list: 'Hardware Repair, System Diagnostics', skill_ids: '1,2' }
-			];
+		? Get_Technicians_List.data 
+		: [
+			{ user_id: 2, name: 'Alex Turner', skills_list: 'Hardware Repair, Electrical Maintenance', skill_ids: '1,3' },
+			{ user_id: 3, name: 'Sarah Connor', skills_list: 'System Diagnostics, Network Diagnostics', skill_ids: '2,4' },
+			{ user_id: 4, name: 'Mike Ross', skills_list: 'Hardware Repair, System Diagnostics', skill_ids: '1,2' }
+		];
 
 		if (!selectedReq || !selectedReq.service_request_id) {
 			return allTechs.map(t => ({
@@ -146,8 +149,8 @@ export default {
 	// Helper for Appsmith Chart Widget: Requests by Status
 	getStatusChartData() {
 		const requests = (typeof Get_All_Service_Requests !== 'undefined' && Get_All_Service_Requests.data) 
-			? Get_All_Service_Requests.data 
-			: [];
+		? Get_All_Service_Requests.data 
+		: [];
 
 		const counts = { pending: 0, assigned: 0, in_progress: 0, completed: 0, cancelled: 0 };
 		requests.forEach(r => {
@@ -167,8 +170,8 @@ export default {
 	// Helper for Appsmith Chart Widget: Requests by Type
 	getTypeChartData() {
 		const requests = (typeof Get_All_Service_Requests !== 'undefined' && Get_All_Service_Requests.data) 
-			? Get_All_Service_Requests.data 
-			: [];
+		? Get_All_Service_Requests.data 
+		: [];
 
 		let repairCount = 0;
 		let diagnoseCount = 0;
