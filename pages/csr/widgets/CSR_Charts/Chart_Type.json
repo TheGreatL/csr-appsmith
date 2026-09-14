@@ -10,18 +10,18 @@
       "seriesName": "Requests by Type"
     }
   },
-  "chartName": "Requests by Type (Click Slice to Filter Table)",
+  "chartName": "Requests by Type",
   "chartType": "PIE_CHART",
   "customEChartConfig": "",
   "customFusionChartConfig": {
-    "type": "pie2d",
     "dataSource": {
       "chart": {
         "caption": "Requests by Type",
         "theme": "fusion"
       },
       "data": []
-    }
+    },
+    "type": "pie2d"
   },
   "dynamicBindingPathList": [
     {

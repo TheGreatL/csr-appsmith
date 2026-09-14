@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 6,
+  "bottomRow": 5,
   "boxShadow": "none",
   "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
   "buttonVariant": "SECONDARY",
@@ -35,10 +35,9 @@
   "responsiveBehavior": "hug",
   "rightColumn": 54,
   "text": "Refresh Data",
-  "topRow": 2,
+  "topRow": 1,
   "type": "BUTTON_WIDGET",
   "version": 1,
   "widgetId": "btn_csr_refresh_id",
   "widgetName": "Btn_CSRRefresh"
 }
-

@@ -10,18 +10,18 @@
       "seriesName": "Requests by Status"
     }
   },
-  "chartName": "Requests by Status (Click Bar to Filter Table)",
+  "chartName": "Requests by Status",
   "chartType": "COLUMN_CHART",
   "customEChartConfig": "",
   "customFusionChartConfig": {
-    "type": "column2d",
     "dataSource": {
       "chart": {
         "caption": "Requests by Status",
         "theme": "fusion"
       },
       "data": []
-    }
+    },
+    "type": "column2d"
   },
   "dynamicBindingPathList": [
     {

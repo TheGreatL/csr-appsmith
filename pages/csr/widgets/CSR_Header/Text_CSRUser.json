@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 6,
+  "bottomRow": 5,
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
@@ -37,10 +37,9 @@
   "text": "{{ 'CSR: ' + (appsmith.store.currentUser ? appsmith.store.currentUser.name : 'Staff') + ' (' + (appsmith.store.currentUser ? appsmith.store.currentUser.user_role : 'CSR') + ')' }}",
   "textAlign": "RIGHT",
   "textColor": "#475569",
-  "topRow": 2,
+  "topRow": 1,
   "type": "TEXT_WIDGET",
   "version": 1,
   "widgetId": "text_csr_user_id",
   "widgetName": "Text_CSRUser"
 }
-

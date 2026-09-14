@@ -32,6 +32,8 @@
   "mobileTopRow": 24,
   "needsErrorInfo": false,
   "onClick": "{{Submit.login()}}",
+  "originalBottomRow": 28,
+  "originalTopRow": 24,
   "parentColumnSpace": 7.234375,
   "parentId": "plvx8sxfb1",
   "parentRowSpace": 10,
