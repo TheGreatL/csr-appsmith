@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 27,
+  "bottomRow": 31,
   "dynamicBindingPathList": [
     {
       "key": "fontFamily"
@@ -29,8 +29,8 @@
   "minDynamicHeight": 4,
   "minWidth": 450,
   "needsErrorInfo": false,
-  "originalBottomRow": 25,
-  "originalTopRow": 20,
+  "originalBottomRow": 27,
+  "originalTopRow": 22,
   "overflow": "NONE",
   "parentColumnSpace": 19,
   "parentId": "canvas_csr_main_id",
@@ -42,7 +42,7 @@
   "text": "{{ '📝 Problem Description:\\n' + (Table_Requests.selectedRow.description || 'No detailed description provided.') }}",
   "textAlign": "LEFT",
   "textColor": "#334155",
-  "topRow": 22,
+  "topRow": 26,
   "type": "TEXT_WIDGET",
   "version": 1,
   "widgetId": "text_csr_problem_desc_id",
